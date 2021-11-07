@@ -2,24 +2,16 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ThemeProvider } from "styled-components/native";
+import { AppContainer } from "./src/components/AppContainer.component";
 import { theme } from "./src/infrastructures/themes";
+import LoginScreen from "./src/services/authentication/screens/LoginScreen.authentication";
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
+      <AppContainer>
+        <LoginScreen />
+      </AppContainer>
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
