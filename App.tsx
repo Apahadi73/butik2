@@ -5,12 +5,13 @@ import { ThemeProvider } from "styled-components/native";
 import { AppContainer } from "./src/components/AppContainer.component";
 import { theme } from "./src/infrastructures/themes";
 import LoginScreen from "./src/services/authentication/screens/LoginScreen.authentication";
+import RegisterScreen from "./src/services/authentication/screens/RegisterScreen.authentication";
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
-        <LoginScreen />
+        <RegisterScreen />
       </AppContainer>
     </ThemeProvider>
   );
