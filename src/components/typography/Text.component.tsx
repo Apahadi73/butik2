@@ -1,5 +1,15 @@
 import styled, { DefaultTheme } from "styled-components/native";
 
+export enum TextType {
+  body = "body",
+  label = "label",
+  caption = "caption",
+  error = "error",
+  hint = "hint",
+  title = "title",
+  link = "link",
+}
+
 const defaultTextStyles = (theme: DefaultTheme) => `
   font-family: ${theme.fonts.body};
   font-weight: ${theme.fontWeights.regular};
@@ -26,10 +36,23 @@ const caption = (theme: DefaultTheme) => `
     font-weight: ${theme.fontWeights.bold};
 `;
 
+const title = (theme: DefaultTheme) => `
+    font-size: ${theme.fontSizes.title};
+    font-weight: ${theme.fontWeights.bold};
+    margin: auto
+`;
+
 const label = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.body};
     font-weight: ${theme.fontWeights.medium};
+`;
+
+const link = (theme: DefaultTheme) => `
+    font-family: ${theme.fonts.heading};
+    font-size: ${theme.fontSizes.body};
+    font-weight: ${theme.fontWeights.medium};
+    font-color:${theme.themeColor.text.secondary};
 `;
 
 interface Variants {
@@ -41,10 +64,12 @@ const variants: Variants = {
   caption,
   error,
   hint,
+  title,
+  link,
 };
 
 type TextProps = {
-  variant: string;
+  variant: TextType;
 };
 export const Text = styled.Text<TextProps>`
   ${({ theme }) => defaultTextStyles(theme)}
@@ -52,5 +77,5 @@ export const Text = styled.Text<TextProps>`
 `;
 
 Text.defaultProps = {
-  variant: "body",
+  variant: TextType.body,
 };

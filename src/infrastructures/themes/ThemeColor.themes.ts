@@ -6,6 +6,7 @@ interface UI {
   disabled: string;
   error: string;
   success: string;
+  white: string;
 }
 
 interface Text {
@@ -29,13 +30,14 @@ export interface ThemeColor {
 
 export const themeColor: ThemeColor = {
   ui: {
-    primary: "#262626",
+    primary: "#082032",
     secondary: "#757575",
     tertiary: "#F1F1F1",
     quaternary: "#FFFFFF",
     disabled: "#DEDEDE",
     error: "#D0421B",
     success: "#138000",
+    white: "#FFFFFF",
   },
   bg: {
     primary: "#FFFFFF",
@@ -43,7 +45,7 @@ export const themeColor: ThemeColor = {
   },
   text: {
     primary: "#262626",
-    secondary: "#757575",
+    secondary: "#5C7AEA",
     disabled: "#9C9C9C",
     inverse: "#FFFFFF",
     error: "#D0421B",
