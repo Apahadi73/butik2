@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pb;
+
+// authentication is a structured data
+import "authentication_msg.proto";
+
+// protoc --go_out=plugins:grpc:directory
+option go_package = "./pb";
+
+service AuthenticationService {
+    rpc GetLogin(Authentication_msg) returns (Authentication_msg){};
+    rpc GetRegister(Authentication_msg) returns (Authentication_msg){};
+}
