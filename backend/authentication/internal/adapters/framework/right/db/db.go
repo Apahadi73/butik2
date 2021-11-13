@@ -1,9 +1,9 @@
 package db
 
 import (
+	"butik/backend/authentication/internal/models"
 	"database/sql"
 	"log"
-	"time"
 
 	sq "github.com/Masterminds/squirrel"
 	// blank import for mysql driver
@@ -40,18 +40,19 @@ func (da Adapter) CloseDbConnection() {
 	}
 }
 
-// AddToHistory adds the result of an operation to the database history table
-func (da Adapter) AddToHistory(answer int32, operation string) error {
-	queryString, args, err := sq.Insert("arith_history").Columns("date", "answer", "operation").
-		Values(time.Now(), answer, operation).ToSql()
+// adds new user to the user table
+func (da Adapter) CreateUser( email , password string) (models.User,error) {
+	queryString, args, err := sq.Insert("users").Columns("email", "password").
+		Values( email, password).ToSql()
+	rUser := models.NewUser(email,password)
+
 	if err != nil {
-		return err
+		return *rUser,err
 	}
 
 	_, err = da.db.Exec(queryString, args...)
 	if err != nil {
-		return err
+		return *rUser,err
 	}
-
-	return nil
+	return *rUser,nil
 }

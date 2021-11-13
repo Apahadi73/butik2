@@ -13,6 +13,7 @@ func (auth Adapter) Register(email string, password string) (string,error){
 }  
 
 
-func (auth Adapter) Login(email string, password string) (string,error){
+func (auth Adapter) Authenticate(email string, password string) (string,error){
+
 	return "User authenticated",nil;
 }  
