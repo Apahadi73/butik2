@@ -7,7 +7,7 @@ import (
 
 func main()  {
 	auth := authentication.NewAdapter()
-	response, err := auth.Login("amir","pahadi")
+	response, err := auth.Authenticate("pahadi","pahadi")
 	if err != nil{
 		fmt.Println(err)
 	}

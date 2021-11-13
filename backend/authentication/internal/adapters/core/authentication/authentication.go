@@ -13,7 +13,10 @@ func (auth Adapter) Register(email string, password string) (string,error){
 }  
 
 
-func (auth Adapter) Authenticate(email string, password string) (string,error){
+func (auth Adapter) Authenticate(uPassword , dbPassword string) (string,error){
+	if uPassword == dbPassword{
+		return "User authenticated",nil;
 
-	return "User authenticated",nil;
+	}
+	return "Password does not match",nil;
 }  

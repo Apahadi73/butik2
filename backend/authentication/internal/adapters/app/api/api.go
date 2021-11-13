@@ -32,7 +32,12 @@ func (apia Adapter) GetLogin(email , password string) (models.User,error){
 		return dbUser,err
 	}
 
+	//  authenticates the user password against the password saved in db
 	response, err:= apia.auth.Authenticate(password,dbUser.password)
 
-	return response,nil
+	if err != nil{
+		return dbUser,err
+	}
+
+	return dbUser,nil
 }  
