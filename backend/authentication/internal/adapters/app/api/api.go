@@ -1,7 +1,7 @@
 package authentication
 
 import (
-	"butik/backend/authentication/internal/models"
+	app "butik/backend/authentication/internal/adapters/app/models"
 	"butik/backend/authentication/internal/ports"
 )
 
@@ -14,7 +14,7 @@ func NewAdapter(auth ports.AuthenticationPort, db ports.DbPort ) *Adapter{
 	return &Adapter{auth: auth,db: db}
 }
 
-func (apia Adapter) GetRegister(email , password string) (models.User,error){
+func (apia Adapter) GetRegister(email , password string) (app.User,error){
 	response, err:= apia.auth.Register(email,password)
 	if err != nil{
 		return response,err
@@ -24,7 +24,7 @@ func (apia Adapter) GetRegister(email , password string) (models.User,error){
 }  
 
 
-func (apia Adapter) GetLogin(email , password string) (models.User,error){
+func (apia Adapter) GetLogin(email , password string) (app.User,error){
 	// check whether user exists in user table or not
 	dbUser,err := apia.db.QueryUserByEmail(email)
 
