@@ -19,6 +19,4 @@ COPY *.go ./
 
 RUN go build -o /authentication
 
-EXPOSE 8080
-
 CMD [ "/authentication" ]

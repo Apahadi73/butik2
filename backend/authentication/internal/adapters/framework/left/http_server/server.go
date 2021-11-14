@@ -34,7 +34,7 @@ func (server Adapter) Start(){
 	app.Use(cors.New())
 
 	// sets up api version
-	api:=app.Group("/api")
+	api:=app.Group("/api/authentication")
 	v1 := api.Group("/v1", func(c *fiber.Ctx) error {
 		c.Set("Version","v1")
 		return c.Next()
@@ -45,9 +45,9 @@ func (server Adapter) Start(){
 
 	// extract port from environment variable
 	PORT := os.Getenv("PORT")
-    log.Fatal(app.Listen(fmt.Sprintf("localhost:%v",PORT)))
+	fmt.Printf("server is listening on port: %v",PORT)
+    log.Fatal(app.Listen(fmt.Sprintf(":%v",PORT)))
 }
-
 
 
 

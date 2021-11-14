@@ -2,6 +2,7 @@ package db
 
 import (
 	"butik/backend/authentication/internal/adapters/framework/right/db/models"
+	"fmt"
 	"log"
 
 	"github.com/go-pg/pg"
@@ -22,10 +23,13 @@ func NewAdapter() (*Adapter, error) {
 		Password: "password",
 		Database: "postgres",
 	})
+
 	err := createSchema(db)
     if err != nil {
         panic(err)
     }
+	fmt.Println("app is connected to db")
+
 	return &Adapter{db: db}, nil
 }
 
