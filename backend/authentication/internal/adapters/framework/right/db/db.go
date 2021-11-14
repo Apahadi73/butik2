@@ -1,23 +1,12 @@
 package db
 
 import (
-	"butik/backend/authentication/internal/models"
-	"fmt"
+	"butik/backend/authentication/internal/adapters/framework/right/db/models"
 	"log"
 
 	"github.com/go-pg/pg"
+	"github.com/go-pg/pg/orm"
 )
-
-
-type User struct {
-    Id     int64
-    email string
-	password string
-}
-
-func (u User) String() string {
-    return fmt.Sprintf("User<%d %s %v>", u.Id, u.email,u.password)
-}
 
 // Adapter implements the DbPort interface
 type Adapter struct {
@@ -28,12 +17,15 @@ type Adapter struct {
 func NewAdapter(driverName, dataSourceName string) (*Adapter, error) {
 	// connect
 	db := pg.Connect(&pg.Options{
-		Addr:     "localhost",
+		Addr:     "localhost:5432",
 		User:     "postgres",
 		Password: "password",
-		Database: "authentication_db",
+		Database: "postgres",
 	})
-	
+	err := createSchema(db)
+    if err != nil {
+        panic(err)
+    }
 	return &Adapter{db: db}, nil
 }
 
@@ -46,30 +38,51 @@ func (da Adapter) CloseDbConnection() {
 }
 
 // adds new user to the user table
-func (da Adapter) CreateUser( email , password string) (models.User,error) {
-	rUser := models.NewUser(email,password)
+func (da Adapter) CreateUser( email , password string) (*models.DBUser,error) {
+	rUser := models.DBUser{Email: email,Password: password}
 	// create a new user in the user table
-	_, err := da.db.Model(&User{
-        email: email,
-        password: password,
+	_, err := da.db.Model(&models.DBUser{
+        Email: email,
+        Password: password,
     }).Insert()
 
 	if err != nil {
-		return *rUser,err
+		return &rUser,err
 	}
-	return *rUser,nil
+
+	return &rUser,nil
 }
 
 
 // query user table by email
-// func (da Adapter) QueryUserByEmail( email , password string) (models.User,error) {
-// 	_, err := da.db.Model(&User{
-//         email: email,
-//         password: password,
-//     }).Insert()
+func (da Adapter) QueryUserByEmail(email string) (*models.DBUser,error) {
+	// Select user by email.
+    user := new(models.DBUser)
 
-// 	if err != nil {
-// 		return *rUser,err
-// 	}
-// 	return *rUser,nil
-// }
+	// queries user table using provided email address
+    err:= da.db.Model(user).Where("email = ?",email).Select()
+    if err != nil {
+        return nil,err
+    }
+	
+	rUser:=models.DBUser{Email: user.Email}
+	return &rUser,nil
+}
+
+
+// createSchema creates database schema for User and Story models.
+func createSchema(db *pg.DB) error {
+    models := []interface{}{
+        (*models.DBUser)(nil),
+    }
+
+    for _, model := range models {
+        err := db.Model(model).CreateTable(&orm.CreateTableOptions{
+            Temp: true,
+        })
+        if err != nil {
+            return err
+        }
+    }
+    return nil
+}
