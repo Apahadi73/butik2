@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -21,10 +22,6 @@ func NewAdapter(api ports.APIPort) *Adapter{
 	return &Adapter{api: api}
 }
 
-// func NewAdapter() * Adapter{
-// 	return &Adapter{}
-// }
-
 // starts our http server
 func (server Adapter) Start(){
 	err := godotenv.Load()
@@ -34,6 +31,7 @@ func (server Adapter) Start(){
 
 	// creates new fiber application
 	app := fiber.New()
+	app.Use(cors.New())
 
 	// sets up api version
 	api:=app.Group("/api")
@@ -41,8 +39,9 @@ func (server Adapter) Start(){
 		c.Set("Version","v1")
 		return c.Next()
 	})
+
 	// sets up routes for the first version of api
-	routes.SetupRoutes(v1)
+	routes.SetupRoutes(v1,server.api)
 
 	// extract port from environment variable
 	PORT := os.Getenv("PORT")
