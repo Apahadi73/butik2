@@ -16,19 +16,25 @@ type Adapter struct {
 
 // NewAdapter creates a new Adapter
 func NewAdapter() (*Adapter, error) {
-	// connect
-	db := pg.Connect(&pg.Options{
-		Addr:     "db:5432",
+	address := fmt.Sprintf("%s:%s", "db", "5432")
+	options := &pg.Options{
 		User:     "postgres",
 		Password: "password",
+		Addr:     address,
 		Database: "postgres",
-	})
+		PoolSize: 50,
+	}
+	// connect
+	db := pg.Connect(options)
+	if db == nil {
+		log.Panic("cannot connect to postgres")
+	}
 
 	err := createSchema(db)
     if err != nil {
         panic(err)
     }
-	fmt.Println("app is connected to db")
+	fmt.Println("app is connected to db on address:",address)
 
 	return &Adapter{db: db}, nil
 }
@@ -45,13 +51,10 @@ func (da Adapter) CloseDbConnection() {
 func (da Adapter) CreateUser( email , password string) (*models.DBUser,error) {
 	rUser := models.DBUser{Email: email,Password: password}
 	// create a new user in the user table
-	_, err := da.db.Model(&models.DBUser{
-        Email: email,
-        Password: password,
-    }).Insert()
+	_, err := da.db.Model(&rUser).Insert()
 
 	if err != nil {
-		return &rUser,err
+		return nil,err
 	}
 
 	return &rUser,nil
@@ -61,15 +64,12 @@ func (da Adapter) CreateUser( email , password string) (*models.DBUser,error) {
 // query user table by email
 func (da Adapter) QueryUserByEmail(email string) (*models.DBUser,error) {
 	// Select user by email.
-    user := new(models.DBUser)
-
+    rUser:=models.DBUser{}
 	// queries user table using provided email address
-    err:= da.db.Model(user).Where("email = ?",email).Select()
+    err:= da.db.Model(&rUser).Where("Email = ?",email).First()
     if err != nil {
         return nil,err
     }
-	
-	rUser:=models.DBUser{Email: user.Email}
 	return &rUser,nil
 }
 

@@ -19,12 +19,14 @@ func Register(c *fiber.Ctx,api ports.APIPort) error{
 	}
 
 	// passes parsed email and password to the application layer
-	response, err:= api.Register(body.Email,body.Password)
+	token, err:= api.Register(body.Email,body.Password)
 
 	if err != nil{
 		return c.Status(400).JSON(err.Error())
 	}
-	return c.JSON(response)
+	m := make(map[string]string)
+	m["token"] = token
+	return c.JSON(m)
 }
 
 // login already existing user
@@ -35,10 +37,12 @@ func  Login(c *fiber.Ctx,api ports.APIPort) error {
 	}
 
 	// passes parsed email and password to the application layer
-	response, err:= api.Login(body.Email,body.Password)
+	token, err:= api.Login(body.Email,body.Password)
 
 	if err != nil{
 		return c.Status(400).JSON(err.Error())
 	}
-	return c.JSON(response)
+	m := make(map[string]string)
+	m["token"] = token
+	return c.JSON(m)
 }

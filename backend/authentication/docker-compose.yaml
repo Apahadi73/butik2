@@ -15,7 +15,7 @@ services:
     ports:
       - "6379:6379"
 
-  myservice:
+  auth:
     image: acim/go-reflex
     environment:
       - RACE_DETECTOR=1
