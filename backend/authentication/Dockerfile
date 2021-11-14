@@ -1,14 +1,24 @@
+# syntax=docker/dockerfile:1
+
+# Alpine is chosen for its small footprint
+# compared to Ubuntu
 FROM golang:1.16-alpine
 
-RUN mkdir /app
 WORKDIR /app
 
-COPY . .
-COPY go.mod .
-COPY go.sum .
+# Download necessary Go modules
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
-RUN go build -o cmd/main.go
-RUN mv main /usr/local/bin/
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
 
-CMD ["main"]
+COPY *.go ./
+
+RUN go build -o /authentication
+
+EXPOSE 8080
+
+CMD [ "/authentication" ]

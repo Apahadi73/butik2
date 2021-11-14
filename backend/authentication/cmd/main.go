@@ -8,7 +8,6 @@ import (
 	"butik/backend/authentication/internal/ports"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/joho/godotenv"
 )
@@ -25,9 +24,7 @@ func main()  {
 	}
 
 	// sets up database
-	dbaseDriver := os.Getenv("DB_DRIVER")
-	dsourceName := os.Getenv("DB_NAME")
-	dbaseAdapter,err =db.NewAdapter(dbaseDriver,dsourceName)
+	dbaseAdapter,err =db.NewAdapter()
 	if err!=nil {
 		log.Fatalf("failed to initiate dbase connection: %v",err)
 	}

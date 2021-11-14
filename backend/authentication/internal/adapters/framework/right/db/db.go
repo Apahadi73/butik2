@@ -14,10 +14,10 @@ type Adapter struct {
 }
 
 // NewAdapter creates a new Adapter
-func NewAdapter(driverName, dataSourceName string) (*Adapter, error) {
+func NewAdapter() (*Adapter, error) {
 	// connect
 	db := pg.Connect(&pg.Options{
-		Addr:     "localhost:5432",
+		Addr:     "db:5432",
 		User:     "postgres",
 		Password: "password",
 		Database: "postgres",

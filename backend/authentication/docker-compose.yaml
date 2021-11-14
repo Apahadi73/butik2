@@ -1,24 +1,28 @@
 version: "3.3"
 
 services:
+  db:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DATABASE: "postgres"
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+
   myservice:
     image: acim/go-reflex
     environment:
       - RACE_DETECTOR=1
-      - BUILD_ARGS=./cmd/server.go
+      - BUILD_ARGS=./cmd/main.go
     volumes:
       - .:/app
     ports:
       - 3000:3000
-  # db:
-  #   image: "postgres"
-  #   ports:
-  #     - "5432:5432"
-  #   environment:
-  #     POSTGRES_USER: "postgres"
-  #     POSTGRES_PASSWORD: "password"
-  #     POSTGRES_DATABASE: "authentication_db"
-  # redis:
-  #   image: "redis:latest"
-  #   ports:
-  #     - "6379:6379"
+    depends_on:
+      - "db"
