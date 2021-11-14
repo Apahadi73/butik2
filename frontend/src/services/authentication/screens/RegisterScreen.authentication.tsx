@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Image, StyleSheet } from "react-native";
 import images from "../../../assets/images";
 import { AppLogoContainer } from "../../../components/image/Image.component";
@@ -9,11 +9,21 @@ import {
   AuthInput,
   AuthLink,
 } from "../components/Authentication.components";
+import { AuthenticationContext } from "../repo/Authentication.context";
 
 const RegisterScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("a@g.c");
+  const [password, setPassword] = useState("password");
+  const { currentUser, isLoading, error, register } = useContext(
+    AuthenticationContext
+  );
   useEffect(() => {}, []);
+
+  const registerHandler = async (e: any) => {
+    e.preventDefault();
+    await register(email, password);
+  };
+
   return (
     <>
       <AccountContainer>
@@ -36,7 +46,8 @@ const RegisterScreen = () => {
           autoCapitalize="none"
           onChangeText={(p) => setPassword(p)}
         />
-        <AuthButton>Register</AuthButton>
+        {error ? <Text variant={TextType.error}>{error}</Text> : null}
+        <AuthButton onPress={registerHandler}>Register</AuthButton>
         <AuthLink>Login</AuthLink>
       </AccountContainer>
     </>

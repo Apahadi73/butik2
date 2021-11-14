@@ -28,3 +28,11 @@ export const AuthInput = styled(TextInput)`
   width: 300px;
   margin: ${(props) => props.theme.space[2]};
 `;
+
+export const ErrorContainer = styled.View`
+  max-width: 300px;
+  align-items: center;
+  align-self: center;
+  margin-top: ${(props) => props.theme.space[2]};
+  margin-bottom: ${(props) => props.theme.space[2]};
+`;

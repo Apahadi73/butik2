@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Image, StyleSheet } from "react-native";
 import images from "../../../assets/images";
 import { AppLogoContainer } from "../../../components/image/Image.component";
-import { Text, TextType } from "../../../components/typography/Text.component";
 import {
   AccountContainer,
   AuthButton,

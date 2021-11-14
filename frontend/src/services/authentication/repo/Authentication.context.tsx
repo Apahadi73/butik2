@@ -1,19 +1,21 @@
-import { createContext } from "react";
+import React, { createContext, FC } from "react";
 import useAuthHook from "./Authentication.hook";
 
 // our custom authentication context
 export const AuthenticationContext = createContext({
   isLoggedIn: false,
   isLoading: true,
-  error: null,
+  error: "",
   currentUser: null,
   login: async (email: string, password: string) => {},
   register: async (email: string, password: string) => {},
   logout: async () => {},
 });
-
+interface Props {
+  // any props that come into the component
+}
 // our authentication context provider object
-export const AuthenticationContextProvider = (children: React.ReactNode) => {
+const AuthenticationContextProvider: FC<Props> = ({ children }) => {
   const { currentUser, isLoading, error, login, register, logout } =
     useAuthHook();
 
@@ -33,3 +35,5 @@ export const AuthenticationContextProvider = (children: React.ReactNode) => {
     </AuthenticationContext.Provider>
   );
 };
+
+export default AuthenticationContextProvider;
