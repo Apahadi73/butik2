@@ -33,8 +33,14 @@ func (server Adapter) Start(){
 	// creates new fiber application
 	app := fiber.New()
 
-	// sets up routes
-	routes.SetupRoutes(app)
+	// sets up api version
+	api:=app.Group("/api")
+	v1 := api.Group("/v1", func(c *fiber.Ctx) error {
+		c.Set("Version","v1")
+		return c.Next()
+	})
+	// sets up routes for the first version of api
+	routes.SetupRoutes(v1)
 
 	// extract port from environment variable
 	PORT := os.Getenv("PORT")

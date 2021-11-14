@@ -7,7 +7,7 @@ import (
 )
 
 // sets up all the route handlers
-func SetupRoutes(app *fiber.App) {
-	app.Get("/register", handlers.Register)
-    app.Get("/login", handlers.Login)
+func SetupRoutes(v1 fiber.Router) {
+	v1.Get("/register", handlers.Register)
+    v1.Get("/login", handlers.Login)
 }
