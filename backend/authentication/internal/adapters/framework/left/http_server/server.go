@@ -2,6 +2,7 @@ package http_server
 
 import (
 	"butik/backend/authentication/internal/adapters/framework/left/http_server/routes"
+	"butik/backend/authentication/internal/ports"
 	"fmt"
 	"log"
 	"os"
@@ -12,18 +13,19 @@ import (
 
 // Adapter implements the DbPort interface
 type Adapter struct {
-	// api ports.APIPort
+	api ports.APIPort
 }
 
 // returns a new http server adapter
-// func NewAdapter(api ports.APIPort) *Adapter{
-// 	return &Adapter{api: api}
-// }
-
-func NewAdapter() * Adapter{
-	return &Adapter{}
+func NewAdapter(api ports.APIPort) *Adapter{
+	return &Adapter{api: api}
 }
 
+// func NewAdapter() * Adapter{
+// 	return &Adapter{}
+// }
+
+// starts our http server
 func (server Adapter) Start(){
 	err := godotenv.Load()
 	if err!=nil {

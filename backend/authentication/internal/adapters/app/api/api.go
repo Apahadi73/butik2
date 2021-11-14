@@ -1,8 +1,8 @@
 package api
 
 import (
-	"butik/backend/authentication/internal/models"
 	"butik/backend/authentication/internal/ports"
+	"fmt"
 )
 
 type Adapter struct{
@@ -14,30 +14,31 @@ func NewAdapter(auth ports.AuthenticationPort, db ports.DbPort ) *Adapter{
 	return &Adapter{auth: auth,db: db}
 }
 
-func (apia Adapter) Register(email , password string) (models.User,error){
+func (apia Adapter) Register(email , password string) (string,error){
 	response, err:= apia.auth.Register(email,password)
 	if err != nil{
 		return response,err
 	}
 	rUser,err := apia.db.CreateUser(email,password)
-	return rUser,nil
+	fmt.Println(rUser)
+	return response,nil
 }  
 
 
-func (apia Adapter) Login(email , password string) (models.User,error){
+func (apia Adapter) Login(email , password string) (string,error){
 	// check whether user exists in user table or not
-	dbUser,err := apia.db.QueryUserByEmail(email)
+	// dbUser,err := apia.db.QueryUserByEmail(email)
 
-	if err != nil{
-		return dbUser,err
-	}
+	// if err != nil{
+	// 	return "",err
+	// }
 
 	//  authenticates the user password against the password saved in db
-	response, err:= apia.auth.Authenticate(password,dbUser.password)
+	response, err:= apia.auth.Authenticate(password,password)
 
 	if err != nil{
-		return dbUser,err
+		return response,err
 	}
 
-	return dbUser,nil
+	return response,nil
 }  
