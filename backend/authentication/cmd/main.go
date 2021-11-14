@@ -31,7 +31,6 @@ func main()  {
 	if err!=nil {
 		log.Fatalf("failed to initiate dbase connection: %v",err)
 	}
-	defer dbaseAdapter.CloseDbConnection()
 
 	// sets up authentication/core
 	authAdapter = authentication.NewAdapter()
@@ -45,4 +44,6 @@ func main()  {
 	if err != nil{
 		fmt.Println(err)
 	}
+
+	defer dbaseAdapter.CloseDbConnection()
 }
