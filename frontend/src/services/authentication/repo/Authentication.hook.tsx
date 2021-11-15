@@ -28,18 +28,14 @@ const useAuthHook = () => {
           // stores token in local persistant memory
           await PersistentStorage.save(PSKeyEnum.TOKEN, token);
           await PersistentStorage.save(PSKeyEnum.EMAIL, email);
-
           setError("");
           setIsLoading(true);
         }
       } catch (e: any) {
         // error handling
         const errMessage = e.response.data;
-        if (errMessage) {
-          setError(errMessage);
-        } else {
-          setError("Please try again");
-        }
+        console.log(errMessage);
+        setError("Please try again with valid input");
         setIsLoading(true);
       }
     }

@@ -13,7 +13,7 @@ import {
 import { AuthenticationContext } from "../repo/Authentication.context";
 
 const RegisterScreen = () => {
-  const [email, setEmail] = useState("a@g.c");
+  const [email, setEmail] = useState("random@patriots.uttyler.edu");
   const [password, setPassword] = useState("password");
   const { currentUser, isLoading, error, register } = useContext(
     AuthenticationContext
@@ -49,7 +49,7 @@ const RegisterScreen = () => {
         />
         {error ? (
           <ErrorContainer size="large">
-            <Text variant="error">{error}</Text>
+            <Text variant={TextType.error}>{error}</Text>
           </ErrorContainer>
         ) : null}
         <AuthButton onPress={registerHandler}>Register</AuthButton>
