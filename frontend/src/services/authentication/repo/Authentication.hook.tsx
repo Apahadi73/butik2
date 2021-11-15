@@ -1,5 +1,9 @@
 import { useCallback, useState } from "react";
 import aAxios from "../utilities/aAxios";
+import jwt from "react-native-pure-jwt";
+import PersistentStorage, {
+  PSKeyEnum,
+} from "../../persistent_storage/SecureStore";
 
 const useAuthHook = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,26 +12,71 @@ const useAuthHook = () => {
 
   // logs in user using email and password
   const login = useCallback(async (email, password) => {
-    setIsLoading(false);
-  }, []);
-
-  // registers new user using email and password
-  const register = useCallback(async (email, password) => {
-    setIsLoading(false);
+    setIsLoading(true);
     const isValid = validateInput(email, password);
 
     if (isValid) {
       try {
+        // api response handling
+        const response = await aAxios.post("/login", {
+          email,
+          password,
+        });
+        if (response && response.data) {
+          const { token } = response.data;
+
+          // stores token in local persistant memory
+          await PersistentStorage.save(PSKeyEnum.TOKEN, token);
+          await PersistentStorage.save(PSKeyEnum.EMAIL, email);
+
+          setError("");
+          setIsLoading(true);
+        }
+      } catch (e: any) {
+        // error handling
+        const errMessage = e.response.data;
+        if (errMessage) {
+          setError(errMessage);
+        } else {
+          setError("Please try again");
+        }
+        setIsLoading(true);
+      }
+    }
+  }, []);
+
+  // registers new user using email and password
+  const register = useCallback(async (email, password) => {
+    setIsLoading(true);
+    const isValid = validateInput(email, password);
+
+    if (isValid) {
+      try {
+        // api response handling
         const response = await aAxios.post("/register", {
           email,
           password,
         });
-        console.log(response);
-      } catch (e) {
-        console.log(e);
+        if (response && response.data) {
+          const { token } = response.data;
+
+          // stores token in local persistant memory
+          await PersistentStorage.save(PSKeyEnum.TOKEN, token);
+          await PersistentStorage.save(PSKeyEnum.EMAIL, email);
+
+          setError("");
+          setIsLoading(true);
+        }
+      } catch (e: any) {
+        // error handling
+        const errMessage = e.response.data;
+        if (errMessage) {
+          setError(errMessage);
+        } else {
+          setError("Please try again");
+        }
+        setIsLoading(true);
       }
-    } else {
-      console.log(error);
     }
   }, []);
 

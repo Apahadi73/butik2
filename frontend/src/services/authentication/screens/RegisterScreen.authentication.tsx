@@ -8,6 +8,7 @@ import {
   AuthButton,
   AuthInput,
   AuthLink,
+  ErrorContainer,
 } from "../components/Authentication.components";
 import { AuthenticationContext } from "../repo/Authentication.context";
 
@@ -46,7 +47,11 @@ const RegisterScreen = () => {
           autoCapitalize="none"
           onChangeText={(p) => setPassword(p)}
         />
-        {error ? <Text variant={TextType.error}>{error}</Text> : null}
+        {error ? (
+          <ErrorContainer size="large">
+            <Text variant="error">{error}</Text>
+          </ErrorContainer>
+        ) : null}
         <AuthButton onPress={registerHandler}>Register</AuthButton>
         <AuthLink>Login</AuthLink>
       </AccountContainer>
