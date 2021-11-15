@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { AppContainer } from "./src/components/AppContainer.component";
+import { Navigation } from "./src/infrastructures/navigation";
 import { theme } from "./src/infrastructures/themes";
 import AuthenticationContextProvider from "./src/services/authentication/repo/Authentication.context";
 import LoginScreen from "./src/services/authentication/screens/LoginScreen.authentication";
@@ -11,7 +12,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <AppContainer>
         <AuthenticationContextProvider>
-          <LoginScreen />
+          <Navigation />
         </AuthenticationContextProvider>
       </AppContainer>
     </ThemeProvider>

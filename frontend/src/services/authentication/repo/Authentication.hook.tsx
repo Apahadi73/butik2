@@ -35,7 +35,7 @@ const useAuthHook = () => {
         // error handling
         const errMessage = e.response.data;
         console.log(errMessage);
-        setError("Please try again with valid input");
+        setError("Invalid email/password");
         setIsLoading(true);
       }
     }
