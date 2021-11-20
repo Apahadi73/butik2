@@ -7,26 +7,26 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: ticketing.dev
+    - host: localhost
       http:
         paths:
-          - path: /api/payments/?(.*)
+          # - path: /api/payments/?(.*)
+          #   backend:
+          #     serviceName: payments-srv
+          #     servicePort: 5000
+          # - path: /api/v1/users/?(.*)
+          #   backend:
+          #     serviceName: auth-srv
+          #     servicePort: 5000
+          - path: /api/v1/products/?(.*)
             backend:
-              serviceName: payments-srv
-              servicePort: 3000
-          - path: /api/users/?(.*)
-            backend:
-              serviceName: auth-srv
-              servicePort: 3000
-          - path: /api/tickets/?(.*)
-            backend:
-              serviceName: tickets-srv
-              servicePort: 3000
-          - path: /api/orders/?(.*)
-            backend:
-              serviceName: orders-srv
-              servicePort: 3000
-          - path: /?(.*)
-            backend:
-              serviceName: client-srv
-              servicePort: 3000
+              serviceName: products-srv
+              servicePort: 5000
+          # - path: /api/orders/?(.*)
+          #   backend:
+          #     serviceName: orders-srv
+          #     servicePort: 5000
+          # - path: /?(.*)
+          #   backend:
+          #     serviceName: client-srv
+          #     servicePort: 5000

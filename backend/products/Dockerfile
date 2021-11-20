@@ -1,18 +1,13 @@
-
+# Pull base image
 FROM python:3.9
-
-
-WORKDIR /app
-
-
-COPY . . 
-
-RUN python3 -m pip install --upgrade pip 
+# Set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /code/
+# Install dependencies
 RUN pip install pipenv
-RUN pipenv install Pipfile
-
-
-COPY . /app
-
-
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+COPY Pipfile Pipfile.lock /code/
+RUN pipenv install --system --dev
+COPY . /code/
+EXPOSE 5000
+CMD ["CD","app","&&","python", "main.py"]
