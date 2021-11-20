@@ -11,7 +11,7 @@ class ProductBase(BaseModel):
     count_in_stock: int = 0
     rating: int = 0
     num_reviews: int = 0
-    
+    owner_id: int = 0
     
 class ProductCreate(ProductBase):
     pass

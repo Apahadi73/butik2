@@ -39,6 +39,7 @@ def update_product(db: Session, product: schemas.Product, id:Optional[int]=None)
     for attr,val in vars(product).items():
         if val:
             setattr(db_product,attr,val)
+    
     db.add(db_product)
     db.commit()
     db.refresh(db_product)
@@ -46,7 +47,6 @@ def update_product(db: Session, product: schemas.Product, id:Optional[int]=None)
 
 #  deletes product by id from the products db
 def delete_product(db: Session, id:Optional[int]=None):
-    # get the existing product
     db_product = db.query(models.Product).filter(models.Product.id == id).one_or_none()
     
     if db_product is None:
