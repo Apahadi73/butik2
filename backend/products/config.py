@@ -1,4 +1,3 @@
-from databases import DatabaseURL
 from starlette.config import Config
 from starlette.datastructures import Secret
 
@@ -18,6 +17,5 @@ POSTGRES_DB = config("POSTGRES_DB", cast=str)
 
 DATABASE_URL = config(
   "DATABASE_URL",
-  cast=DatabaseURL,
   default=f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
 )
