@@ -12,7 +12,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <AppContainer>
         <AuthenticationContextProvider>
-          <Navigation />
+          <LoginScreen />
         </AuthenticationContextProvider>
       </AppContainer>
     </ThemeProvider>
