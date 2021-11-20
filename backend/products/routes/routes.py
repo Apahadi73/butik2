@@ -29,14 +29,19 @@ def create_product(
 ):
     return crud.create_product(db=db, product=product)
 
-# @router.get("/products/{id}")
-# async def get_products_by_id(id:int = Path(None,description="Product Id",gt=0)):
-#     response =  await get_products_by_id_api(id)
-#     return response
+@router.get("/products/{id}")
+def get_products_by_id(id:int = Path(None,description="Product Id",gt=0), db: Session = Depends(con.get_db)):
+    response = crud.get_product_by_id(db=db,id=id)
+    return response
 
-# @router.get("/products/product-name/")
-# async def get_products_by_name(*,name: Optional[str] = None):
-#     if name:
-#         response = await get_products_by_name_api(name=name)
-#         return response
-#     return {"Message":"Product Not Found"}
+@router.put("/products/{id}")
+def update_product(product: schemas.ProductUpdate, 
+                   db: Session = Depends(con.get_db),
+                   id:int = Path(None,description="Product Id",gt=0)):
+    response = crud.update_product(db=db,product=product,id=id)
+    return response
+
+@router.delete("/products/{id}")
+def delete_products_by_id(id:int = Path(None,description="Product Id",gt=0), db: Session = Depends(con.get_db)):
+    response = crud.delete_product(db=db,id=id)
+    return response

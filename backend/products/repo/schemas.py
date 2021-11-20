@@ -1,4 +1,3 @@
-from sqlalchemy.sql.expression import true
 from pydantic import BaseModel
 from typing import Optional
 
@@ -17,6 +16,8 @@ class ProductBase(BaseModel):
 class ProductCreate(ProductBase):
     pass
 
+class ProductUpdate(ProductBase):
+    pass
 
 class Product(ProductBase):
     id: Optional[int] = None

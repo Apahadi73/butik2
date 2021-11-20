@@ -14,4 +14,7 @@ class Product(Base):
     count_in_stock = Column(Integer)
     rating = Column(Integer)
     num_reviews = Column(Integer)
+    
+    def __str__(self) -> str:
+        return "Product\nid="+str(self.id)+"\nname="+self.name+"\nimage="+self.image+"\ndescription="+self.description+"\nbrand="+self.brand
 
