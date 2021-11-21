@@ -14,9 +14,8 @@ const useAuthHook = () => {
   const login = useCallback(async (email, password) => {
     setIsLoading(true);
     const isValid = validateInput(email, password);
-
-    if (isValid) {
-      try {
+    try {
+      if (isValid) {
         // api response handling
         const response = await aAxios.post("/login", {
           email,
@@ -31,13 +30,16 @@ const useAuthHook = () => {
           setError("");
           setIsLoading(true);
         }
-      } catch (e: any) {
-        // error handling
+      }
+    } catch (e: any) {
+      // error handling
+      console.log(e);
+      if (e.response && e.response.data) {
         const errMessage = e.response.data;
         console.log(errMessage);
-        setError("Invalid email/password");
-        setIsLoading(true);
       }
+      setError("Invalid email/password");
+      setIsLoading(true);
     }
   }, []);
 
@@ -65,11 +67,10 @@ const useAuthHook = () => {
         }
       } catch (e: any) {
         // error handling
-        const errMessage = e.response.data;
-        if (errMessage) {
+        if (e.response && e.response.data) {
+          const errMessage = e.response.data;
+          console.log(errMessage);
           setError(errMessage);
-        } else {
-          setError("Please try again");
         }
         setIsLoading(true);
       }

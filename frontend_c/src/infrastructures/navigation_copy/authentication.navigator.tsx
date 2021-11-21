@@ -5,9 +5,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-export const AccountNavigator = () => (
+const AccountNavigator = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen name="Register" component={RegisterScreen} />
     <Stack.Screen name="Login" component={LoginScreen} />
   </Stack.Navigator>
 );
+
+export default AccountNavigator;
