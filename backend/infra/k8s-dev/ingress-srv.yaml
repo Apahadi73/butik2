@@ -5,11 +5,17 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
+
+spec:
 spec:
   rules:
-    - host: localhost
+    - host: butik.dev
       http:
         paths:
+          - path: /api/v1/products/?(.*)
+            backend:
+              serviceName: products-srv
+              servicePort: 5000
           # - path: /api/payments/?(.*)
           #   backend:
           #     serviceName: payments-srv
@@ -18,10 +24,7 @@ spec:
           #   backend:
           #     serviceName: auth-srv
           #     servicePort: 5000
-          - path: /api/v1/products/?(.*)
-            backend:
-              serviceName: products-srv
-              servicePort: 5000
+
           # - path: /api/orders/?(.*)
           #   backend:
           #     serviceName: orders-srv

@@ -17,7 +17,7 @@ spec:
           image: apahadi73/products
           env:
             - name: DATABASE_URL
-              value: "postgresql://product:password@products-postgres-srv:5432/products"
+              value: "postgresql://product:password@products-postgres-srv:27017/products"
             - name: SECRET_KEY
               value: "postgres"
             - name: POSTGRES_USER
@@ -27,7 +27,7 @@ spec:
             - name: POSTGRES_SERVER
               value: "db"
             - name: POSTGRES_PORT
-              value: "5432"
+              value: "27017"
             - name: POSTGRES_DB
               value: "products"
             - name: PORT
