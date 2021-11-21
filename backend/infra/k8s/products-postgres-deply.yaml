@@ -17,13 +17,13 @@ spec:
           image: postgres
           env:
             - name: POSTGRES_USER
-              value: "postgres"
+              value: "product"
             - name: POSTGRES_PASSWORD
               value: "password"
             - name: POSTGRES_SERVER
               value: "db"
             - name: POSTGRES_PORT
-              value: "27017"
+              value: "5432"
             - name: POSTGRES_DB
               value: "products"
 
@@ -38,5 +38,5 @@ spec:
   ports:
     - name: db
       protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 5432
+      targetPort: 5432
