@@ -15,9 +15,8 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-COPY . . 
+COPY *.go ./
 
-# RUN cd cmd
-RUN go build ./cmd
+RUN go build -o /authentication
 
-# CMD [ "/authentication" ]
+CMD [ "/authentication" ]
