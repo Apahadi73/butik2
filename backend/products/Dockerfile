@@ -1,13 +1,14 @@
-# Pull base image
-FROM python:3.9
-# Set environment varibles
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-WORKDIR /code/
-# Install dependencies
+FROM python:3.8-bullseye
+
+WORKDIR /app
+
 RUN pip install pipenv
-COPY Pipfile Pipfile.lock /code/
-RUN pipenv install --system --dev
-COPY . /code/
-EXPOSE 5000
-CMD ["CD","app","&&","python", "main.py"]
+
+COPY ./Pipfile.lock ./Pipfile.lock
+COPY ./Pipfile ./Pipfile
+
+RUN pipenv install
+
+COPY . .
+
+CMD ["pipenv", "run", "python3", "./src/main.py"]
