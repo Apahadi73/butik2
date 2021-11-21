@@ -15,6 +15,18 @@ spec:
       containers:
         - name: products-postgres
           image: postgres
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "password"
+            - name: POSTGRES_SERVER
+              value: "db"
+            - name: POSTGRES_PORT
+              value: "27017"
+            - name: POSTGRES_DB
+              value: "products"
+
 ---
 apiVersion: v1
 kind: Service

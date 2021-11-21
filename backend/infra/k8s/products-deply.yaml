@@ -14,23 +14,23 @@ spec:
     spec:
       containers:
         - name: products
-          image: cygnetops/products
+          image: apahadi73/products
           env:
-            - name: NATS_CLIENT_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: NATS_URL
-              value: "http://nats-srv:4222"
-            - name: NATS_CLUSTER_ID
-              value: ticketing
-            - name: MONGO_URI
-              value: "mongodb://products-mongo-srv:27017/products"
-            - name: JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
+            - name: DATABASE_URL
+              value: "postgresql://postgress:password@localhost:27017/products"
+            - name: SECRET_KEY
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "password"
+            - name: POSTGRES_SERVER
+              value: "db"
+            - name: POSTGRES_PORT
+              value: "27017"
+            - name: POSTGRES_DB
+              value: "products"
+
 ---
 apiVersion: v1
 kind: Service
