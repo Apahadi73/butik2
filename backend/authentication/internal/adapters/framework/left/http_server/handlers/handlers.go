@@ -3,6 +3,7 @@ package handlers
 import (
 	"butik/backend/authentication/internal/models"
 	"butik/backend/authentication/internal/ports"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -17,6 +18,8 @@ func Register(c *fiber.Ctx,api ports.APIPort) error{
 	if err := c.BodyParser(body); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
+
+	fmt.Println(body)
 
 	// passes parsed email and password to the application layer
 	token, err:= api.Register(body.Email,body.Password)

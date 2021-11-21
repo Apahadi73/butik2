@@ -34,8 +34,7 @@ func (server Adapter) Start(){
 	app.Use(cors.New())
 
 	// sets up api version
-	api:=app.Group("/api/authentication")
-	v1 := api.Group("/v1", func(c *fiber.Ctx) error {
+	v1 := app.Group("/api/v1/authentication", func(c *fiber.Ctx) error {
 		c.Set("Version","v1")
 		return c.Next()
 	})
