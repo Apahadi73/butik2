@@ -2,7 +2,7 @@
 
 # Alpine is chosen for its small footprint
 # compared to Ubuntu
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine 
 
 WORKDIR /app
 
@@ -11,13 +11,9 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-COPY go.mod ./
-COPY go.sum ./
-RUN go mod download
-
 COPY . . 
 
 # RUN cd cmd
-RUN go build ./cmd
+RUN go build -o main .
 
-# CMD [ "/authentication" ]
+CMD [ "./main" ]

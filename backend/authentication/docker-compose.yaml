@@ -15,14 +15,12 @@ services:
     ports:
       - "6379:6379"
 
-  # auth:
-  #   image: acim/go-reflex
-  #   environment:
-  #     - RACE_DETECTOR=1
-  #     - BUILD_ARGS=./cmd/main.go
-  #   volumes:
-  #     - .:/app
-  #   ports:
-  #     - 3001:3001
-  #   depends_on:
-  #     - "db"
+  auth:
+    image: apahadi73/auth-go
+    ports:
+      - 5000:5000
+    depends_on:
+      - "db"
+    environment:
+      - PORT:5000
+      - HOST:"db"
