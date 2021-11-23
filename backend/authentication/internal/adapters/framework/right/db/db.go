@@ -4,6 +4,7 @@ import (
 	"butik/backend/authentication/internal/adapters/framework/right/db/models"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/go-pg/pg"
 	"github.com/go-pg/pg/orm"
@@ -16,8 +17,8 @@ type Adapter struct {
 
 // NewAdapter creates a new Adapter
 func NewAdapter() (*Adapter, error) {
-	host:="localhost"
-	address := fmt.Sprintf("%s:%s", host, "5432")
+	HOST := os.Getenv("HOST")
+	address := fmt.Sprintf("%s:%s", HOST, "5432")
 	options := &pg.Options{
 		User:     "postgres",
 		Password: "password",
