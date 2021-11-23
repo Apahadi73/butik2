@@ -16,7 +16,8 @@ type Adapter struct {
 
 // NewAdapter creates a new Adapter
 func NewAdapter() (*Adapter, error) {
-	address := fmt.Sprintf("%s:%s", "db", "5432")
+	host:="localhost"
+	address := fmt.Sprintf("%s:%s", host, "5432")
 	options := &pg.Options{
 		User:     "postgres",
 		Password: "password",

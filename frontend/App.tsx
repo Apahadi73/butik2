@@ -10,11 +10,10 @@ import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "styled-components/native";
 
-import Navigation from "../butik/src/infrastructure/navigation";
-import { theme } from "../butik/src/infrastructure/themes";
-import AuthenticationContextProvider from "../butik/src/services/authentication/repo/Authentication.context";
+import Navigation from "./src/infrastructure/navigation";
+import { theme } from "./src/infrastructure/themes";
+import AuthenticationContextProvider from "./src/services/authentication/repo/Authentication.context";
 import AppLoading from "expo-app-loading";
-import { AppContainer } from "../butik/src/components/AppContainer.component";
 
 export default function App() {
   let [fontsLoaded, error] = useFonts({
