@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  db:
+  auth-postgres:
     image: "postgres"
     ports:
       - "5432:5432"
@@ -10,17 +10,12 @@ services:
       POSTGRES_PASSWORD: "password"
       POSTGRES_DATABASE: "postgres"
 
-  redis:
-    image: "redis:latest"
-    ports:
-      - "6379:6379"
-
   auth:
-    image: apahadi73/auth-go
+    # image: apahadi73/auth-go
+    build: .
     ports:
       - 5000:5000
     depends_on:
-      - "db"
+      - "auth-postgres"
     environment:
       - PORT:5000
-      - HOST:"db"

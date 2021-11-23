@@ -18,12 +18,18 @@ type Adapter struct {
 // NewAdapter creates a new Adapter
 func NewAdapter() (*Adapter, error) {
 	HOST := os.Getenv("HOST")
-	address := fmt.Sprintf("%s:%s", HOST, "5432")
+	POSTGRES_PORT := os.Getenv("POSTGRES_PORT")
+	POSTGRES_USER := os.Getenv("POSTGRES_USER")
+	POSTGRES_PASSWORD := os.Getenv("POSTGRES_PASSWORD")
+	POSTGRES_DB := os.Getenv("POSTGRES_DB")
+	fmt.Println(POSTGRES_DB)
+	fmt.Println(HOST)
+	address := fmt.Sprintf("%s:%s", HOST, POSTGRES_PORT)
 	options := &pg.Options{
-		User:     "postgres",
-		Password: "password",
+		User:     POSTGRES_USER,
+		Password: POSTGRES_PASSWORD,
 		Addr:     address,
-		Database: "postgres",
+		Database: POSTGRES_DB,
 		PoolSize: 50,
 	}
 	// connect
