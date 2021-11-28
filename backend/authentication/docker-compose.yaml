@@ -2,16 +2,9 @@ version: "3.3"
 
 services:
   auth-postgres:
-    image: "postgres"
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_DATABASE: "postgres"
-    expose:
-      - "5431"
+    image: "apahadi73/auth-postgres"
     ports:
-      - "5431:5431"
-    command: -p 5431
+      - "5430:5430"
 
   auth:
     image: apahadi73/auth-go
@@ -25,6 +18,6 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
       POSTGRES_DATABASE: "postgres"
-      POSTGRES_PORT: "5431"
+      POSTGRES_PORT: "5430"
       ACCESS_SECRET: "aavash123"
       HOST: "auth-postgres"
