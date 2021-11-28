@@ -21,15 +21,13 @@ func NewAdapter() (*Adapter, error) {
 	POSTGRES_PORT := os.Getenv("POSTGRES_PORT")
 	POSTGRES_USER := os.Getenv("POSTGRES_USER")
 	POSTGRES_PASSWORD := os.Getenv("POSTGRES_PASSWORD")
-	POSTGRES_DB := os.Getenv("POSTGRES_DB")
-	fmt.Println(POSTGRES_DB)
-	fmt.Println(HOST)
+	POSTGRES_DATABASE := os.Getenv("POSTGRES_DATABASE")
 	address := fmt.Sprintf("%s:%s", HOST, POSTGRES_PORT)
 	options := &pg.Options{
 		User:     POSTGRES_USER,
 		Password: POSTGRES_PASSWORD,
 		Addr:     address,
-		Database: POSTGRES_DB,
+		Database: POSTGRES_DATABASE,
 		PoolSize: 50,
 	}
 	// connect
