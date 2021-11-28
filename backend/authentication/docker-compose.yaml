@@ -3,16 +3,19 @@ version: "3.3"
 services:
   auth-postgres:
     image: "postgres"
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
       POSTGRES_DATABASE: "postgres"
+    expose:
+      - "5431"
+    ports:
+      - "5431:5431"
+    command: -p 5431
 
   auth:
-    # image: apahadi73/auth-go
-    build: .
+    image: apahadi73/auth-go
+    # build: .
     ports:
       - 5000:5000
     depends_on:
@@ -22,6 +25,6 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
       POSTGRES_DATABASE: "postgres"
-      POSTGRES_PORT: "5432"
+      POSTGRES_PORT: "5431"
       ACCESS_SECRET: "aavash123"
       HOST: "auth-postgres"
