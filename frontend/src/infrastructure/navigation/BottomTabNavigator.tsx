@@ -1,13 +1,12 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Pressable } from "react-native";
-import Colors from "../../constants/Colors";
-import useColorScheme from "../../hooks/useColorScheme";
 import TabOneScreen from "../../screens/TabOneScreen";
 import TabTwoScreen from "../../screens/TabTwoScreen";
 import TabBarIcon from "./TabBarIcon";
 import { RootTabParamList, RootTabScreenProps } from "./types";
 import React from "react";
+import { themeColor } from "../themes/ThemeColor.themes";
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -16,13 +15,11 @@ import React from "react";
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: themeColor.ui.primary,
       }}
     >
       <BottomTab.Screen
@@ -41,7 +38,7 @@ export default function BottomTabNavigator() {
               <FontAwesome
                 name="info-circle"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={themeColor.text.primary}
                 style={{ marginRight: 15 }}
               />
             </Pressable>

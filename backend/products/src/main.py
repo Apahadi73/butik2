@@ -7,7 +7,7 @@ app = FastAPI(title="Products Service")
 
 @app.get("/")
 def welcome():
-    return "welcome"
+    return "welcome to products service"
 
 # sets up router
 app.include_router(r.router)

@@ -16,7 +16,7 @@ router = APIRouter(
 def index():
     return "Welcome to the product service"
 
-@router.get("/products/", response_model=List[schemas.Product])
+@router.get("/products/list", response_model=List[schemas.Product])
 def get_products(skip: int = 0, limit: int = 100, db: Session = Depends(con.get_db)):
     products = crud.get_products(db, skip=skip, limit=limit)
     if not products:
