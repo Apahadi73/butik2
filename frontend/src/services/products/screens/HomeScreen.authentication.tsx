@@ -11,32 +11,36 @@ import {
   AuthLink,
   ErrorContainer,
 } from "../components/Authentication.components";
-import {
-  AuthenticationContext,
-  ProductsContext,
-} from "../repo/Products.context";
+import { ProductsContext } from "../repo/Products.context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthStackParamList } from "../../../infrastructure/navigation/types";
 
 export interface LoginProps {
   navigation: StackNavigationProp<AuthStackParamList, "Login">;
 }
+
+// Constants
+const LIMIT = 10;
+
 const HomeScreen: React.FC<LoginProps> = ({ navigation }) => {
+  const [paginationNum, setPaginationNum] = useState<number>(0);
+
   const { isLoading, error, products, fetchProducts } =
     useContext(ProductsContext);
   useEffect(() => {
-    fetchProducts();
-  }, [console.log(navigation)]);
+    fetchProducts(0, LIMIT);
+  }, [navigation]);
 
   useEffect(() => {
-    console.log(products);
+    console.log("products:->>", products.length);
+    console.log("products:->>", products[2]);
   }, [products]);
 
   return (
     <>
       <AppContainer>
         <AccountContainer>
-          <Text variant={TextType.body}>Home Screen</Text>
+          <Text variant={TextType.body}>Home Screen1</Text>
         </AccountContainer>
       </AppContainer>
     </>

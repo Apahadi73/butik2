@@ -11,24 +11,22 @@ const useProductsHook = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<ProductModel[]>([]);
   const [error, setError] = useState<string>("");
-  const [paginationNum, setPaginationNum] = useState<number[]>([0, 10]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (pagNum: number = 0, limit: number) => {
     try {
       setIsLoading(true);
+      console.log("fetching products");
       const response = await productAxios.get(
-        `list?skip=${paginationNum[0]}&limit=${paginationNum[1]}`
+        `list?skip=${pagNum}&limit=${limit}`
       );
 
       if (response && response.data) {
         const moreProducts = response.data;
         let updatedProducts: ProductModel[] = products;
         updatedProducts.push(...moreProducts);
+        console.log("fetching products");
+
         setProducts(updatedProducts);
-        setPaginationNum([
-          paginationNum[0] + paginationNum[1],
-          paginationNum[1],
-        ]);
         setError("");
         setIsLoading(true);
       }

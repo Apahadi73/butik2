@@ -8,7 +8,7 @@ export const ProductsContext = createContext<{
   isLoading: boolean;
   error: string;
   products: ProductModel[];
-  fetchProducts: () => Promise<void>;
+  fetchProducts: (pagNum: number, limit: number) => Promise<void>;
 }>({
   isLoading: true,
   error: "",
