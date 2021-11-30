@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import aAxios from "../utilities/aAxios";
-import jwt from "react-native-pure-jwt";
 import PersistentStorage, {
   PSKeyEnum,
 } from "../../persistent_storage/SecureStore";
+import authAxios from "../utilities/aAxios";
 
 const useAuthHook = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +17,7 @@ const useAuthHook = () => {
     try {
       if (isValid) {
         // api response handling
-        const response = await aAxios.post("/login", {
+        const response = await authAxios.post("/login", {
           email,
           password,
         });
@@ -32,6 +32,7 @@ const useAuthHook = () => {
         }
       }
     } catch (e: any) {
+      console.log(e);
       // error handling
       if (e.response && e.response.data) {
         const errMessage = e.response.data;
@@ -90,6 +91,7 @@ const useAuthHook = () => {
     }
     return false;
   };
+
   // validates email using the regular expression
   const validateEmail = (email: string) => {
     const expression =

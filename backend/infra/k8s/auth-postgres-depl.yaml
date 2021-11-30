@@ -14,22 +14,10 @@ spec:
     spec:
       containers:
         - name: auth-postgres
-          image: postgres
+          image: apahadi73/auth-postgres
           env:
-            - name: SECRET_KEY
-              value: "postgres"
-            - name: POSTGRES_USER
-              value: "product"
-            - name: POSTGRES_PASSWORD
-              value: "password"
             - name: POSTGRES_SERVER
               value: "db"
-            - name: POSTGRES_PORT
-              value: "5431"
-            - name: POSTGRES_DB
-              value: "auth"
-            - name: PORT
-              value: "auth"
 
 ---
 apiVersion: v1
@@ -43,4 +31,4 @@ spec:
     - name: db
       protocol: TCP
       port: 27018
-      targetPort: 5431
+      targetPort: 5430
