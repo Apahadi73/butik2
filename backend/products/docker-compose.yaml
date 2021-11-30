@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   db:
-    image: postgres:14-alpine
+    image: postgres
     ports:
       - 5432:5432
     environment:
@@ -10,16 +10,16 @@ services:
       POSTGRES_PASSWORD: "password"
       POSTGRES_DATABASE: "postgres"
 
-  server:
-    image: apahadi73/products
-    ports:
-      - 5000:5000
-    depends_on:
-      - "db"
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_DATABASE: "postgres"
-      POSTGRES_SERVER: "db"
-      POSTGRES_PORT: "5432"
-      POSTGRES_DB: "postgres"
+  # server:
+  #   image: apahadi73/products
+  #   ports:
+  #     - 5000:5000
+  #   depends_on:
+  #     - "db"
+  #   environment:
+  #     POSTGRES_USER: "postgres"
+  #     POSTGRES_PASSWORD: "password"
+  #     POSTGRES_DATABASE: "postgres"
+  #     POSTGRES_SERVER: "db"
+  #     POSTGRES_PORT: "5432"
+  #     POSTGRES_DB: "postgres"

@@ -6,9 +6,10 @@ dummy_products = [
     "brand": "Apple",
     "category": "Electronics",
     "price": 249.99,
-    "countInStock": 3,
+    "count_in_stock": 3,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Echo Dot (4th Gen)",
@@ -17,9 +18,10 @@ dummy_products = [
     "brand": "Amazon",
     "category": "Electronics",
     "price": 49.99,
-    "countInStock": 23,
+    "count_in_stock": 23,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Macbook Air 2020",
@@ -28,9 +30,10 @@ dummy_products = [
     "brand": "Apple",
     "category": "Electronics",
     "price": 999.99,
-    "countInStock": 13,
+    "count_in_stock": 13,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Nokia 7.2",
@@ -39,9 +42,10 @@ dummy_products = [
     "brand": "Nokia",
     "category": "Electronics",
     "price": 199.99,
-    "countInStock": 33,
+    "count_in_stock": 33,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Acer Nitro 5",
@@ -50,9 +54,10 @@ dummy_products = [
     "brand": "Acer",
     "category": "Electronics",
     "price": 649.99,
-    "countInStock": 3,
+    "count_in_stock": 3,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "New Apple MacBook Pro (16-inch)",
@@ -61,9 +66,10 @@ dummy_products = [
     "brand": "Apple",
     "category": "Electronics",
     "price": 2449.99,
-    "countInStock": 0,
+    "count_in_stock": 0,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":1
   },
 
   {
@@ -73,9 +79,10 @@ dummy_products = [
     "brand": "Apple",
     "category": "Electronics",
     "price": 112.99,
-    "countInStock": 3,
+    "count_in_stock": 3,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Sony Headphone",
@@ -84,9 +91,10 @@ dummy_products = [
     "brand": "Sony",
     "category": "Electronics",
     "price": 199.99,
-    "countInStock": 33,
+    "count_in_stock": 33,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Beats Solo3",
@@ -95,9 +103,10 @@ dummy_products = [
     "brand": "Beats",
     "category": "Electronics",
     "price": 199.99,
-    "countInStock": 33,
+    "count_in_stock": 33,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
   {
     "name": "Samsung Galaxy S6",
@@ -106,8 +115,9 @@ dummy_products = [
     "brand": "Samsung",
     "category": "Electronics",
     "price": 199.99,
-    "countInStock": 33,
+    "count_in_stock": 33,
     "rating": 0,
-    "numReviews": 0,
+    "num_reviews": 0,
+    "owner_id":"1"
   },
 ];

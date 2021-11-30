@@ -9,7 +9,6 @@ models.Base.metadata.create_all(bind=repo_db.engine)
 # Dependency
 def get_db():
     db = repo_db.SessionLocal()
-    print("reached here")
     try:
         yield db
     finally:
