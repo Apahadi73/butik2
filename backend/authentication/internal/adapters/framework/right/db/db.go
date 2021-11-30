@@ -4,6 +4,7 @@ import (
 	"butik/backend/authentication/internal/adapters/framework/right/db/models"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/go-pg/pg"
 	"github.com/go-pg/pg/orm"
@@ -16,12 +17,17 @@ type Adapter struct {
 
 // NewAdapter creates a new Adapter
 func NewAdapter() (*Adapter, error) {
-	address := fmt.Sprintf("%s:%s", "db", "5432")
+	HOST := os.Getenv("HOST")
+	POSTGRES_PORT := os.Getenv("POSTGRES_PORT")
+	POSTGRES_USER := os.Getenv("POSTGRES_USER")
+	POSTGRES_PASSWORD := os.Getenv("POSTGRES_PASSWORD")
+	POSTGRES_DATABASE := os.Getenv("POSTGRES_DATABASE")
+	address := fmt.Sprintf("%s:%s", HOST, POSTGRES_PORT)
 	options := &pg.Options{
-		User:     "postgres",
-		Password: "password",
+		User:     POSTGRES_USER,
+		Password: POSTGRES_PASSWORD,
 		Addr:     address,
-		Database: "postgres",
+		Database: POSTGRES_DATABASE,
 		PoolSize: 50,
 	}
 	// connect

@@ -24,7 +24,6 @@ const PersistentStorage = {
 
   deleteKey: async (key: string) => {
     let result = await SecureStore.deleteItemAsync(key);
-    console.log(result);
   },
 };
 

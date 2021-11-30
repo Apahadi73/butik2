@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { Button, TextInput } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
-import { themeColor } from "../../../infrastructures/themes/ThemeColor.themes";
+import { themeColor } from "../../../infrastructure/themes/ThemeColor.themes";
 
 export const AccountContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);

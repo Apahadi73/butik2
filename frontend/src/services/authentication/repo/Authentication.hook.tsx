@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import aAxios from "../utilities/aAxios";
-import jwt from "react-native-pure-jwt";
 import PersistentStorage, {
   PSKeyEnum,
 } from "../../persistent_storage/SecureStore";
+import authAxios from "../utilities/aAxios";
 
 const useAuthHook = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,11 +14,10 @@ const useAuthHook = () => {
   const login = useCallback(async (email, password) => {
     setIsLoading(true);
     const isValid = validateInput(email, password);
-
-    if (isValid) {
-      try {
+    try {
+      if (isValid) {
         // api response handling
-        const response = await aAxios.post("/login", {
+        const response = await authAxios.post("/login", {
           email,
           password,
         });
@@ -31,13 +30,15 @@ const useAuthHook = () => {
           setError("");
           setIsLoading(true);
         }
-      } catch (e: any) {
-        // error handling
-        const errMessage = e.response.data;
-        console.log(errMessage);
-        setError("Invalid email/password");
-        setIsLoading(true);
       }
+    } catch (e: any) {
+      console.log(e);
+      // error handling
+      if (e.response && e.response.data) {
+        const errMessage = e.response.data;
+      }
+      setError("Invalid email/password");
+      setIsLoading(true);
     }
   }, []);
 
@@ -65,11 +66,9 @@ const useAuthHook = () => {
         }
       } catch (e: any) {
         // error handling
-        const errMessage = e.response.data;
-        if (errMessage) {
+        if (e.response && e.response.data) {
+          const errMessage = e.response.data;
           setError(errMessage);
-        } else {
-          setError("Please try again");
         }
         setIsLoading(true);
       }
@@ -92,6 +91,7 @@ const useAuthHook = () => {
     }
     return false;
   };
+
   // validates email using the regular expression
   const validateEmail = (email: string) => {
     const expression =

@@ -9,7 +9,6 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/joho/godotenv"
 )
 
 // Adapter implements the DbPort interface
@@ -24,18 +23,17 @@ func NewAdapter(api ports.APIPort) *Adapter{
 
 // starts our http server
 func (server Adapter) Start(){
-	err := godotenv.Load()
-	if err!=nil {
-		log.Fatal(err)
-	}
+	// err := godotenv.Load()
+	// if err!=nil {
+	// 	log.Fatal(err)
+	// }
 
 	// creates new fiber application
 	app := fiber.New()
 	app.Use(cors.New())
 
 	// sets up api version
-	api:=app.Group("/api/authentication")
-	v1 := api.Group("/v1", func(c *fiber.Ctx) error {
+	v1 := app.Group("/api/v1/authentication", func(c *fiber.Ctx) error {
 		c.Set("Version","v1")
 		return c.Next()
 	})
