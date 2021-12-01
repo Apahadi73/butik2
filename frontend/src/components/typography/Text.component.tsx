@@ -8,6 +8,7 @@ export enum TextType {
   hint = "hint",
   title = "title",
   link = "link",
+  header = "header",
 }
 
 const defaultTextStyles = (theme: DefaultTheme) => `
@@ -42,6 +43,12 @@ const title = (theme: DefaultTheme) => `
     margin: auto
 `;
 
+const header = (theme: DefaultTheme) => `
+    font-size: ${theme.fontSizes.h5};
+    font-weight: ${theme.fontWeights.bold};
+    margin: auto
+`;
+
 const label = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.body};
@@ -66,6 +73,7 @@ const variants: Variants = {
   hint,
   title,
   link,
+  header,
 };
 
 type TextProps = {

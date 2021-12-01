@@ -15,7 +15,6 @@ const useProductsHook = () => {
   const fetchProducts = async (pagNum: number = 0, limit: number) => {
     try {
       setIsLoading(true);
-      console.log("fetching products");
       const response = await productAxios.get(
         `list?skip=${pagNum}&limit=${limit}`
       );
@@ -24,8 +23,7 @@ const useProductsHook = () => {
         const moreProducts = response.data;
         let updatedProducts: ProductModel[] = products;
         updatedProducts.push(...moreProducts);
-        console.log("fetching products");
-
+        console.log("fetched products");
         setProducts(updatedProducts);
         setError("");
         setIsLoading(true);

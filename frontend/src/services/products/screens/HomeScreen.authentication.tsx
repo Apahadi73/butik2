@@ -1,19 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, Image } from "react-native";
-import images from "../../../assets/images";
 import { AppContainer } from "../../../components/AppContainer.component";
-import { AppLogoContainer } from "../../../components/image/Image.component";
 import { Text, TextType } from "../../../components/typography/Text.component";
-import {
-  AccountContainer,
-  AuthButton,
-  AuthInput,
-  AuthLink,
-  ErrorContainer,
-} from "../components/Authentication.components";
 import { ProductsContext } from "../repo/Products.context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthStackParamList } from "../../../infrastructure/navigation/types";
+import { HomeScreenContainer } from "../components/Product-info-card.styles";
+import ProductInfoCard from "../components/Product-info-card.components";
 
 export interface LoginProps {
   navigation: StackNavigationProp<AuthStackParamList, "Login">;
@@ -38,11 +30,13 @@ const HomeScreen: React.FC<LoginProps> = ({ navigation }) => {
 
   return (
     <>
-      <AppContainer>
-        <AccountContainer>
-          <Text variant={TextType.body}>Home Screen1</Text>
-        </AccountContainer>
-      </AppContainer>
+      <HomeScreenContainer>
+        <Text variant={TextType.header}>Find the stuff you love</Text>
+        {products &&
+          products.map((product, index) => {
+            return <ProductInfoCard product={product} key={index} />;
+          })}
+      </HomeScreenContainer>
     </>
   );
 };
