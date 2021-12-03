@@ -18,7 +18,7 @@ export const ProductCard = styled(Card)`
 `;
 
 export const ProductCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[3]};
+  padding: ${(props) => props.theme.space[2]};
   background-color: ${themeColor.bg.primary};
 `;
 
@@ -39,8 +39,6 @@ export const Info = styled.View`
 
 export const Rating = styled.View`
   flex-direction: row;
-  padding-top: ${(props) => props.theme.space[2]};
-  padding-bottom: ${(props) => props.theme.space[2]};
 `;
 
 export const Section = styled.View`

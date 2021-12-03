@@ -11,17 +11,12 @@ export interface LoginProps {
   navigation: StackNavigationProp<AuthStackParamList, "Login">;
 }
 
-// Constants
-const LIMIT = 10;
-
 const HomeScreen: React.FC<LoginProps> = ({ navigation }) => {
   const [paginationNum, setPaginationNum] = useState<number>(0);
 
   const { isLoading, error, products, fetchProducts } =
     useContext(ProductsContext);
-  useEffect(() => {
-    fetchProducts(0, LIMIT);
-  }, [navigation]);
+  useEffect(() => {}, [navigation]);
 
   useEffect(() => {
     console.log("products:->>", products.length);

@@ -6,11 +6,16 @@ import PersistentStorage, {
 } from "../../persistent_storage/SecureStore";
 import productAxios from "../utilities/productAxios";
 import { ProductModel } from "./models/ProductModel";
+import { ProductConstants } from "../utilities/CONSTANTS";
 
 const useProductsHook = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<ProductModel[]>([]);
   const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    fetchProducts(0, ProductConstants.PRODUCT_LIMIT);
+  }, []);
 
   const fetchProducts = async (pagNum: number = 0, limit: number) => {
     try {

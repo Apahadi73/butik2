@@ -15,6 +15,12 @@ import {
 import star from "../../../assets/images/star";
 import { Text, TextType } from "../../../components/typography/Text.component";
 import { AppLogoContainer } from "../../../components/image/Image.component";
+import {
+  RowContainer,
+  RowContainerSpacer,
+  SpaceBetweenRow,
+} from "../../../components/App.styles";
+import { Spacer } from "../../../components/spacer/spacer.component";
 
 interface ProductInfoCardProps {
   product: ProductModel;
@@ -27,10 +33,16 @@ const ProductInfoCard = ({ product }: ProductInfoCardProps): JSX.Element => {
       <Info>
         <Text variant={TextType.title}>{product.name}</Text>
         <Section>
-          <Rating>
-            <SvgXml xml={star} width={20} height={20} />
-            {product.rating}
-          </Rating>
+          <RowContainerSpacer>
+            <SpaceBetweenRow>
+              <Rating>
+                <SvgXml xml={star} width={20} height={20} />
+                <Text variant={TextType.body}>{product.rating}</Text>
+              </Rating>
+
+              <Text variant={TextType.bodyBold}>{`$${product.price}`}</Text>
+            </SpaceBetweenRow>
+          </RowContainerSpacer>
           <SectionEnd></SectionEnd>
         </Section>
       </Info>

@@ -9,6 +9,7 @@ export enum TextType {
   title = "title",
   link = "link",
   header = "header",
+  bodyBold = "bodyBold",
 }
 
 const defaultTextStyles = (theme: DefaultTheme) => `
@@ -59,7 +60,14 @@ const link = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.body};
     font-weight: ${theme.fontWeights.medium};
-    font-color:${theme.themeColor.text.secondary};
+    color:${theme.themeColor.text.secondary};
+`;
+
+const bodyBold = (theme: DefaultTheme) => `
+    font-family: ${theme.fonts.body};
+    font-size: ${theme.fontSizes.body};
+    font-weight: ${theme.fontWeights.bold};
+    color:${theme.themeColor.text.success};
 `;
 
 interface Variants {
@@ -74,6 +82,7 @@ const variants: Variants = {
   title,
   link,
   header,
+  bodyBold,
 };
 
 type TextProps = {
