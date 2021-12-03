@@ -16,11 +16,13 @@ import {
 } from "../../../components/spacer/spacer.component";
 import { View } from "../../../components_r/Themed";
 import {
+  Button,
   RowContainerSpacer,
   SpaceBetweenRow,
 } from "../../../components/App.styles";
 import { SvgXml } from "react-native-svg";
 import star from "../../../assets/images/star";
+import { AddButton } from "../components/Product-detail.styles";
 
 interface ProductDetailScreenNavigatorProps {
   navigation: StackNavigationProp<HomeStackParamList, "ProductDetailScreen">;
@@ -38,9 +40,9 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
     fetchProductById(route.params.id ? route.params.id : 1);
   }, [navigation]);
 
-  useEffect(() => {
-    console.log("product->", product);
-  }, [product]);
+  // useEffect(() => {
+  //   console.log("product->", product);
+  // }, [product]);
 
   return (
     <>
@@ -49,11 +51,7 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
           <>
             <Text variant={TextType.title}>{product.name}</Text>
             <ProductImage source={{ uri: product.image }} />
-            <Spacer size={SizeEnum.small} position={MarginType.left}>
-              <View>
-                <Text variant={TextType.body}>{product.description}</Text>
-              </View>
-            </Spacer>
+            <Text variant={TextType.body}>{product.description}</Text>
             <RowContainerSpacer>
               <SpaceBetweenRow>
                 <Rating>
@@ -63,6 +61,8 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
                 <Text variant={TextType.bodyBold}>{`$${product.price}`}</Text>
               </SpaceBetweenRow>
             </RowContainerSpacer>
+
+            <AddButton onPress={() => {}}>Add to Cart</AddButton>
           </>
         )}
       </HomeScreenContainer>
