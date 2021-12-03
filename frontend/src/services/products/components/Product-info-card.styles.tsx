@@ -17,8 +17,7 @@ export const ProductCard = styled(Card)`
   margin: ${(props) => props.theme.space[2]};
 `;
 
-export const ProductCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[2]};
+export const ProductCardCover = styled.TouchableWithoutFeedback`
   background-color: ${themeColor.bg.primary};
 `;
 

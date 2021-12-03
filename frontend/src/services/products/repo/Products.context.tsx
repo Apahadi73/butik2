@@ -8,12 +8,16 @@ export const ProductsContext = createContext<{
   isLoading: boolean;
   error: string;
   products: ProductModel[];
+  product: ProductModel | null;
   fetchProducts: (pagNum: number, limit: number) => Promise<void>;
+  fetchProductById: (id: number) => Promise<void>;
 }>({
   isLoading: true,
   error: "",
   products: [],
-  fetchProducts: async () => {},
+  product: null,
+  fetchProducts: async (pagNum: number, limit: number) => {},
+  fetchProductById: async (id: number) => {},
 });
 
 interface Props {
@@ -22,7 +26,14 @@ interface Props {
 
 // our Products context provider object
 const ProductsContextProvider: FC<Props> = ({ children }) => {
-  const { isLoading, error, products, fetchProducts } = useProductsHook();
+  const {
+    isLoading,
+    error,
+    products,
+    product,
+    fetchProducts,
+    fetchProductById,
+  } = useProductsHook();
 
   return (
     <ProductsContext.Provider
@@ -31,6 +42,8 @@ const ProductsContextProvider: FC<Props> = ({ children }) => {
         error: error,
         products: products,
         fetchProducts: fetchProducts,
+        product: product,
+        fetchProductById: fetchProductById,
       }}
     >
       {children}

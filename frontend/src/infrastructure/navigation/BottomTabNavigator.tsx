@@ -7,7 +7,8 @@ import TabBarIcon from "./TabBarIcon";
 import { RootTabParamList, RootTabScreenProps } from "./types";
 import React from "react";
 import { themeColor } from "../themes/ThemeColor.themes";
-import HomeScreen from "../../services/products/screens/HomeScreen.authentication";
+import HomeScreen from "../../services/products/screens/HomeScreen.home";
+import HomeNavigator from "./HomeNavigator";
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -18,15 +19,15 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: themeColor.ui.primary,
       }}
     >
       <BottomTab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"HomeScreen">) => ({
+        name="Home"
+        component={HomeNavigator}
+        options={({ navigation }: RootTabScreenProps<"Home">) => ({
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           tabBarLabel: "Home",
           headerShown: false,

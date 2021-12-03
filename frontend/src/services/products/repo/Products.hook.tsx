@@ -11,6 +11,7 @@ import { ProductConstants } from "../utilities/CONSTANTS";
 const useProductsHook = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<ProductModel[]>([]);
+  const [product, setProduct] = useState<ProductModel | null>(null);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
@@ -44,7 +45,35 @@ const useProductsHook = () => {
     }
   };
 
-  return { isLoading, error, products, fetchProducts };
+  const fetchProductById = async (id: number) => {
+    try {
+      setIsLoading(true);
+      const response = await productAxios.get(`/${id}`);
+
+      if (response && response.data) {
+        const rProduct = response.data;
+        setProduct(rProduct);
+        setError("");
+        setIsLoading(true);
+      }
+    } catch (e: any) {
+      let errMessage = "Something went wrong";
+      if (e.response && e.response.data) {
+        errMessage = e.response.data;
+      }
+      setError(errMessage);
+      setIsLoading(true);
+    }
+  };
+
+  return {
+    isLoading,
+    error,
+    products,
+    product,
+    fetchProducts,
+    fetchProductById,
+  };
 };
 
 export default useProductsHook;

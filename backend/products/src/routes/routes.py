@@ -12,7 +12,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-@router.get("/")
+@router.get("/products")
 def index():
     return "Welcome to the product service"
 
