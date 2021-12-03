@@ -12,12 +12,12 @@ export const HomeScreenContainer = styled.ScrollView`
 
 export const ProductCard = styled(Card)`
   background-color: ${themeColor.bg.primary};
-  width: 88%;
+  width: 100%;
   align-self: center;
   margin: ${(props) => props.theme.space[2]};
 `;
 
-export const ProductCardCover = styled.TouchableWithoutFeedback`
+export const ProductCardCover = styled.TouchableNativeFeedback`
   background-color: ${themeColor.bg.primary};
 `;
 

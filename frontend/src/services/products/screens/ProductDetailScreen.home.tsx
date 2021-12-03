@@ -23,6 +23,7 @@ import {
 import { SvgXml } from "react-native-svg";
 import star from "../../../assets/images/star";
 import { AddButton } from "../components/Product-detail.styles";
+import { CartContext } from "../../cart/repo/Cart.context";
 
 interface ProductDetailScreenNavigatorProps {
   navigation: StackNavigationProp<HomeStackParamList, "ProductDetailScreen">;
@@ -35,6 +36,7 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
 }) => {
   const { isLoading, error, product, fetchProductById } =
     useContext(ProductsContext);
+  const { addItemToCart } = useContext(CartContext);
   useEffect(() => {
     console.log(route.params.id);
     fetchProductById(route.params.id ? route.params.id : 1);
@@ -43,6 +45,12 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
   // useEffect(() => {
   //   console.log("product->", product);
   // }, [product]);
+
+  const onAddToCartBtnPressed = () => {
+    if (product) {
+      addItemToCart(product);
+    }
+  };
 
   return (
     <>
@@ -62,7 +70,7 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
               </SpaceBetweenRow>
             </RowContainerSpacer>
 
-            <AddButton onPress={() => {}}>Add to Cart</AddButton>
+            <AddButton onPress={onAddToCartBtnPressed}>Add to Cart</AddButton>
           </>
         )}
       </HomeScreenContainer>

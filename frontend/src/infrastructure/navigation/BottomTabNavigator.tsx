@@ -9,6 +9,7 @@ import React from "react";
 import { themeColor } from "../themes/ThemeColor.themes";
 import HomeScreen from "../../services/products/screens/HomeScreen.home";
 import HomeNavigator from "./HomeNavigator";
+import CartScreen from "../../services/cart/screens/CartScreen.cart";
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -32,6 +33,17 @@ export default function BottomTabNavigator() {
           tabBarLabel: "Home",
           headerShown: false,
         })}
+      />
+      <BottomTab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          title: "Cart",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="shopping-cart" color={color} />
+          ),
+          headerShown: false,
+        }}
       />
       <BottomTab.Screen
         name="TabTwo"
