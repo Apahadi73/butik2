@@ -12,8 +12,11 @@ const useCartHook = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cartItems, setCartItems] = useState<CartItemModel[]>([]);
   const [error, setError] = useState<string>("");
+  const [total, setTotal] = useState<number>(0);
 
   const addItemToCart = (product: CartItemModel) => {
+    const updatedTotal = product.price ? total + product.price : total;
+    setTotal(updatedTotal);
     const updatedCart = [...cartItems, product];
     setCartItems(updatedCart);
   };
@@ -41,6 +44,7 @@ const useCartHook = () => {
     isLoading,
     error,
     cartItems,
+    total,
     addItemToCart,
     IncreaseIteminCart,
     DecreaseIteminCart,

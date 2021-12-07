@@ -1,4 +1,4 @@
 // Constants
-export const ProductConstants = {
-  PRODUCT_LIMIT: 10,
+export const CartConstants = {
+  TAX_RATE: 0.0825,
 };

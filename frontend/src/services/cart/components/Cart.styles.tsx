@@ -22,3 +22,11 @@ export const ProductThumbnail = styled.Image`
   height: 40px;
   background-color: ${themeColor.bg.secondary};
 `;
+
+export const CheckoutButton = styled(Button).attrs({
+  color: themeColor.ui.white,
+})`
+  padding: ${(props) => props.theme.space[2]};
+  margin: ${(props) => props.theme.space[2]};
+  background-color: ${themeColor.ui.primary};
+`;

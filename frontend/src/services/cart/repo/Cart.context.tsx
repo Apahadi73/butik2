@@ -8,6 +8,7 @@ export const CartContext = createContext<{
   isLoading: boolean;
   error: string;
   cartItems: ProductModel[];
+  total: number;
   addItemToCart: (product: ProductModel) => void;
   IncreaseIteminCart: (id: number) => void;
   DecreaseIteminCart: (id: number) => void;
@@ -15,6 +16,7 @@ export const CartContext = createContext<{
   isLoading: true,
   error: "",
   cartItems: [],
+  total: 0,
   addItemToCart: (product: ProductModel) => {},
   IncreaseIteminCart: (id: number) => {},
   DecreaseIteminCart: (id: number) => {},
@@ -30,6 +32,7 @@ const CartContextProvider: FC<Props> = ({ children }) => {
     isLoading,
     error,
     cartItems,
+    total,
     addItemToCart,
     IncreaseIteminCart,
     DecreaseIteminCart,
@@ -41,6 +44,7 @@ const CartContextProvider: FC<Props> = ({ children }) => {
         isLoading: isLoading,
         error: error,
         cartItems: cartItems,
+        total: total,
         addItemToCart: addItemToCart,
         IncreaseIteminCart: IncreaseIteminCart,
         DecreaseIteminCart: DecreaseIteminCart,
