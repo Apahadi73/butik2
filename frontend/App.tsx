@@ -14,6 +14,8 @@ import Navigation from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/themes";
 import AuthenticationContextProvider from "./src/services/authentication/repo/Authentication.context";
 import AppLoading from "expo-app-loading";
+import ProductsContextProvider from "./src/services/products/repo/Products.context";
+import CartContextProvider from "./src/services/cart/repo/Cart.context";
 
 export default function App() {
   let [fontsLoaded, error] = useFonts({
@@ -31,7 +33,11 @@ export default function App() {
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <Navigation />
+          <ProductsContextProvider>
+            <CartContextProvider>
+              <Navigation />
+            </CartContextProvider>
+          </ProductsContextProvider>
         </AuthenticationContextProvider>
       </ThemeProvider>
       <StatusBar />

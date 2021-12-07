@@ -8,6 +8,8 @@ export enum TextType {
   hint = "hint",
   title = "title",
   link = "link",
+  header = "header",
+  bodyBold = "bodyBold",
 }
 
 const defaultTextStyles = (theme: DefaultTheme) => `
@@ -42,6 +44,12 @@ const title = (theme: DefaultTheme) => `
     margin: auto
 `;
 
+const header = (theme: DefaultTheme) => `
+    font-size: ${theme.fontSizes.h5};
+    font-weight: ${theme.fontWeights.bold};
+    margin: auto
+`;
+
 const label = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.body};
@@ -52,7 +60,14 @@ const link = (theme: DefaultTheme) => `
     font-family: ${theme.fonts.heading};
     font-size: ${theme.fontSizes.body};
     font-weight: ${theme.fontWeights.medium};
-    font-color:${theme.themeColor.text.secondary};
+    color:${theme.themeColor.text.secondary};
+`;
+
+const bodyBold = (theme: DefaultTheme) => `
+    font-family: ${theme.fonts.body};
+    font-size: ${theme.fontSizes.body};
+    font-weight: ${theme.fontWeights.bold};
+    color:${theme.themeColor.text.success};
 `;
 
 interface Variants {
@@ -66,6 +81,8 @@ const variants: Variants = {
   hint,
   title,
   link,
+  header,
+  bodyBold,
 };
 
 type TextProps = {

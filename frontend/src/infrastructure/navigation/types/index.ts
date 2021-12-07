@@ -4,6 +4,7 @@
  */
 
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { RouteProp } from "@react-navigation/native";
 import {
   CompositeScreenProps,
   NavigatorScreenParams,
@@ -26,16 +27,26 @@ export type AppStackParamList = {
   Auth: undefined;
   Main: undefined;
 };
+
 export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
 };
 
+export type HomeStackParamList = {
+  HomeScreen: undefined;
+  ProductDetailScreen: { id: number };
+};
+
+export type HomeRouteProps<RouteName extends keyof HomeStackParamList> =
+  RouteProp<HomeStackParamList, RouteName>;
+
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
-  TabOne: undefined;
+  Home: undefined;
+  Cart: undefined;
   TabTwo: undefined;
 };
 
