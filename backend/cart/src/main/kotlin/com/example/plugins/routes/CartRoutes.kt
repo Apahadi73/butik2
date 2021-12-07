@@ -9,7 +9,6 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Application.configureRouting() {
-
     routing {
         cartRouting()
     }
@@ -27,8 +26,12 @@ fun Route.cartRouting() {
                 status = HttpStatusCode.BadRequest
             )
             if (cartItems.isNotEmpty()) {
-                val cart = cartItems.filter { cart -> cart.uid == uid }
-                call.respond(HttpStatusCode(200, "OK"), cart)
+                val cart = cartItems[uid.toInt()]
+                if (cart != null) {
+                    call.respond(HttpStatusCode(200, "OK"), cart)
+                } else {
+                    call.respondText("No cart items found", status = HttpStatusCode.NotFound)
+                }
             } else {
                 call.respondText("No cart items found", status = HttpStatusCode.NotFound)
             }
@@ -40,12 +43,18 @@ fun Route.cartRouting() {
                 status = HttpStatusCode.BadRequest
             )
             val newCartItem = call.receive<CartItem>()
-            cartItems.forEach {
-                if (it.uid == uid) {
-                    it.contents += newCartItem
+
+            if (cartItems.isNotEmpty()) {
+                val cart = cartItems[uid.toInt()]
+                if (cart != null) {
+                    cart.contents[newCartItem.id] = newCartItem
+                    call.respond(HttpStatusCode(200, "OK"), cart)
+                } else {
+                    call.respondText("Failed to add item to the cart", status = HttpStatusCode.InternalServerError)
                 }
+            } else {
+                call.respondText("Failed to add item to the cart", status = HttpStatusCode.InternalServerError)
             }
-            call.respondText("Item added to the cart correctly", status = HttpStatusCode.Created)
         }
 
         put("{uid}/{id}") {
@@ -58,17 +67,11 @@ fun Route.cartRouting() {
                 status = HttpStatusCode.BadRequest
             )
             val updatedItem = call.receive<CartItem>()
-            cartItems.forEach { cart ->
-                if (cart.uid == uid) {
-//                    cart.contents.map { item ->
-//                        if (item.id == id) {
-//                            item = updatedItem
-//                        }
-//                    }
-//                    TODO: work here
-                }
+            val cart = cartItems[uid.toInt()]
+            if (cart != null) {
+                cart.contents[updatedItem.id] = updatedItem
             }
-            call.respondText("Item added to the cart correctly", status = HttpStatusCode.Created)
+            call.respondText("Item added to the cart correctly", status = HttpStatusCode.OK)
         }
 
         delete("{uid}") {
@@ -76,8 +79,8 @@ fun Route.cartRouting() {
                 "Missing uid",
                 status = HttpStatusCode.BadRequest
             )
-            cartItems.removeIf { it.uid == uid }
-            call.respondText("All items removed successfully from the cart", status = HttpStatusCode.Created)
+            cartItems.remove(uid.toInt())
+            call.respondText("All items removed successfully from the cart", status = HttpStatusCode.OK)
         }
 
         delete("{uid}/{id}") {
@@ -89,11 +92,7 @@ fun Route.cartRouting() {
                 "Missing id",
                 status = HttpStatusCode.BadRequest
             )
-            cartItems.forEach { cart ->
-                if (cart.uid == uid) {
-                    cart.contents = cart.contents.filter { it.id != id }
-                }
-            }
+//            cartItems[uid].contents.filter { it.id != id }
             call.respondText("Item removed successfully from the cart", status = HttpStatusCode.Created)
         }
     }

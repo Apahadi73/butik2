@@ -3,31 +3,31 @@ package com.example.plugins.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Cart(val uid: String, var contents: List<CartItem>)
+data class Cart(val uid: String, var contents: HashMap<Int, CartItem>)
 
 @Serializable
-data class CartItem(val id: String, val name: String, val quantity: Int, val price: Double, val image: String)
+data class CartItem(val id: Int, val name: String, val quantity: Int, val price: Double, val image: String)
 
 // stores cart items
-val cartItems = mutableListOf<Cart>(
-    Cart(
-        "1", listOf(
-            CartItem(
-                "1",
+val cartItems: HashMap<Int, Cart> = hashMapOf(
+    1 to Cart(
+        "1", hashMapOf(
+            1 to CartItem(
+                1,
                 "Camera",
                 1,
                 354.23,
                 "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
             ),
-            CartItem(
-                "1",
+            2 to CartItem(
+                2,
                 "Camera",
                 1,
                 354.23,
                 "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
             ),
-            CartItem(
-                "1",
+            3 to CartItem(
+                3,
                 "Camera",
                 1,
                 354.23,
@@ -35,24 +35,24 @@ val cartItems = mutableListOf<Cart>(
             )
         )
     ),
-    Cart(
-        "2", listOf(
-            CartItem(
-                "1",
+    2 to Cart(
+        "2", hashMapOf(
+            1 to CartItem(
+                1,
                 "Camera",
                 1,
                 354.23,
                 "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
             ),
-            CartItem(
-                "1",
+            2 to CartItem(
+                2,
                 "Camera",
                 1,
                 354.23,
                 "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
             ),
-            CartItem(
-                "1",
+            3 to CartItem(
+                3,
                 "Camera",
                 1,
                 354.23,
