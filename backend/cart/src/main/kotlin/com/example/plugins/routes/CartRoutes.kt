@@ -1,8 +1,8 @@
-package com.example.plugins
+package com.example.plugins.routes
 
 import Status
 import com.example.plugins.models.CartItem
-import com.example.plugins.repository.Repo
+import com.example.plugins.repository.ApiService
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -12,21 +12,20 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
 
 fun Application.configureRouting(kodein: Kodein) {
-    val repo: Repo by kodein.instance()
+    val apiService: ApiService by kodein.instance()
     routing {
-        cartRouting(repo)
+        cartRouting(apiService)
     }
 }
 
-fun Route.cartRouting(repo: Repo) {
+fun Route.cartRouting(apiService: ApiService) {
     route("/api/v1/cart") {
         get("") {
-            repo.connect()
             call.respond(status = HttpStatusCode.OK, "Welcome to the cart service version 1!")
         }
 
         get("/list") {
-            val result = repo.getCarts()
+            val result = apiService.getCarts()
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
@@ -39,7 +38,7 @@ fun Route.cartRouting(repo: Repo) {
                 "Missing cid",
                 status = HttpStatusCode.BadRequest
             )
-            val result = repo.getCartById(cid)
+            val result = apiService.getCartById(cid)
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
@@ -53,7 +52,7 @@ fun Route.cartRouting(repo: Repo) {
                 status = HttpStatusCode.BadRequest
             )
             val newCartItem = call.receive<CartItem>()
-            val result = repo.addNewItemToCart(cid, newCartItem)
+            val result = apiService.addNewItemToCart(cid, newCartItem)
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
@@ -67,7 +66,7 @@ fun Route.cartRouting(repo: Repo) {
                 status = HttpStatusCode.BadRequest
             )
             val updatedItem = call.receive<CartItem>()
-            val result = repo.updateCartById(cid, updatedItem)
+            val result = apiService.updateCartById(cid, updatedItem)
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
@@ -81,7 +80,7 @@ fun Route.cartRouting(repo: Repo) {
                 status = HttpStatusCode.BadRequest
             )
 
-            val result = repo.deleteCartById(cid)
+            val result = apiService.deleteCartById(cid)
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.message)
             } else {
@@ -98,7 +97,7 @@ fun Route.cartRouting(repo: Repo) {
                 "Missing id",
                 status = HttpStatusCode.BadRequest
             )
-            val result = repo.removeItemFromCart(cid, id.toInt())
+            val result = apiService.removeItemFromCart(cid, id.toInt())
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
@@ -107,7 +106,7 @@ fun Route.cartRouting(repo: Repo) {
         }
 
         delete("/list") {
-            val result = repo.removeAllCarts()
+            val result = apiService.removeAllCarts()
             if (result.status == Status.SUCCESS) {
                 call.respondText(result.message, status = HttpStatusCode.OK)
             } else {
