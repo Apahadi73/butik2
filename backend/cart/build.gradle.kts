@@ -1,6 +1,7 @@
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val kmongo_version: String by project
 
 plugins {
     application
@@ -27,9 +28,14 @@ dependencies {
     implementation("io.ktor:ktor-html-builder:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
+
     // dependency
     implementation("org.kodein.di:kodein-di-generic-jvm:5.0.1")
 //    implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:7.9.0")
+
+    // database
+    implementation("org.litote.kmongo:kmongo-coroutine:$kmongo_version")
+
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 }

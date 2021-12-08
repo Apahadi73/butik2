@@ -2,21 +2,26 @@ package com.example.plugins
 
 import com.example.plugins.models.CartItem
 import com.example.plugins.models.cartItems
+import com.example.plugins.repo.Repo
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import org.kodein.di.Kodein
+import org.kodein.di.generic.instance
 
-fun Application.configureRouting() {
+fun Application.configureRouting(kodein: Kodein) {
+    val db: Repo by kodein.instance()
     routing {
-        cartRouting()
+        cartRouting(db)
     }
 }
 
-fun Route.cartRouting() {
+fun Route.cartRouting(db: Repo) {
     route("/api/v1/cart") {
         get("") {
+            db.connect()
             call.respond(HttpStatusCode(200, "OK"), "Welcome to the cart service version 1!")
         }
         get("{uid}") {

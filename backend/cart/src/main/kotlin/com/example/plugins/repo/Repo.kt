@@ -4,6 +4,7 @@ import com.example.plugins.models.Cart
 import com.example.plugins.models.CartItem
 
 interface Repo {
+    suspend fun connect()
     suspend fun addNewItemToCart(cartItem: CartItem): Cart
     suspend fun removeItemFromCart(cartItem: CartItem): Cart
     suspend fun deleteCart(uid: String): Boolean

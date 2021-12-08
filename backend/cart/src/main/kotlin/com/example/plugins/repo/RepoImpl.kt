@@ -1,9 +1,27 @@
 package com.example.plugins.repo
 
+import com.example.plugins.database.initDb
 import com.example.plugins.models.Cart
 import com.example.plugins.models.CartItem
+import org.litote.kmongo.coroutine.CoroutineCollection
 
 class RepoImpl : Repo {
+    lateinit var db: CoroutineCollection<Cart>
+
+    init {
+        val connection = initDb()
+        if (connection != null) {
+            db = connection
+            print("Connected to the database")
+        } else {
+            print("Failed to connect to the database")
+        }
+    }
+
+    override suspend fun connect() {
+        print("Connected to the database")
+    }
+
     override suspend fun addNewItemToCart(cartItem: CartItem): Cart {
         TODO("Adds new item to the cart")
     }
