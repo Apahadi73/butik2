@@ -2,7 +2,7 @@ package com.example.plugins
 
 import Status
 import com.example.plugins.models.CartItem
-import com.example.plugins.repo.Repo
+import com.example.plugins.repository.Repo
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -22,7 +22,7 @@ fun Route.cartRouting(repo: Repo) {
     route("/api/v1/cart") {
         get("") {
             repo.connect()
-            call.respond(HttpStatusCode(200, "OK"), "Welcome to the cart service version 1!")
+            call.respond(status = HttpStatusCode.OK, "Welcome to the cart service version 1!")
         }
 
         get("/list") {
@@ -30,7 +30,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.NotFound)
             }
         }
 
@@ -43,7 +43,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.BadRequest)
             }
         }
 
@@ -57,7 +57,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.BadRequest)
             }
         }
 
@@ -71,7 +71,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.BadRequest)
             }
         }
 
@@ -85,7 +85,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.message)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.BadRequest)
             }
         }
 
@@ -102,7 +102,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.BadRequest)
             }
         }
 
@@ -111,7 +111,7 @@ fun Route.cartRouting(repo: Repo) {
             if (result.status == Status.SUCCESS) {
                 call.respondText(result.message, status = HttpStatusCode.OK)
             } else {
-                call.respondText(result.message, status = HttpStatusCode.OK)
+                call.respondText(result.message, status = HttpStatusCode.BadRequest)
             }
         }
     }

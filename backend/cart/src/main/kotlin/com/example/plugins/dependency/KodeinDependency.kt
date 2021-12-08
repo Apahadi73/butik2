@@ -1,7 +1,7 @@
 package com.example.plugins.dependency
 
-import com.example.plugins.repo.Repo
-import com.example.plugins.repo.RepoImpl
+import com.example.plugins.repository.Repo
+import com.example.plugins.repository.RepoImpl
 import io.ktor.application.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
