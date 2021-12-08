@@ -3,7 +3,7 @@ package com.example.plugins.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Cart(val cid: String, var contents: HashMap<Int, CartItem>, var total: Double)
+data class Cart(val cid: String, var items: HashMap<Int, CartItem>, var total: Double)
 
 @Serializable
 data class CartItem(val id: Int, val name: String, val quantity: Int, val price: Double, val image: String)

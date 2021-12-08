@@ -13,7 +13,7 @@ interface Repo {
 
     suspend fun updateCartById(cid: String, updatedCartItem: CartItem): RepoResult<Cart>
 
-    suspend fun removeItemFromCart(cartItem: CartItem): Cart
-    suspend fun deleteCart(uid: String): Boolean
+    suspend fun removeItemFromCart(cid: String, id: Int): RepoResult<Cart>
+    suspend fun deleteCartById(cid: String): RepoResult<Unit>
     suspend fun removeAllCarts(): RepoResult<Unit>
 }

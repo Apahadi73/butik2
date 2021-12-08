@@ -36,7 +36,7 @@ fun Route.cartRouting(repo: Repo) {
 
         get("{cid}") {
             val cid = call.parameters["cid"] ?: return@get call.respondText(
-                "Missing or malformed id",
+                "Missing cid",
                 status = HttpStatusCode.BadRequest
             )
             val result = repo.getCartById(cid)
@@ -49,7 +49,7 @@ fun Route.cartRouting(repo: Repo) {
 
         post("{cid}") {
             val cid = call.parameters["cid"] ?: return@post call.respondText(
-                "Missing uid",
+                "Missing cid",
                 status = HttpStatusCode.BadRequest
             )
             val newCartItem = call.receive<CartItem>()
@@ -61,46 +61,50 @@ fun Route.cartRouting(repo: Repo) {
             }
         }
 
-        put("{uid}/{id}") {
-            val uid = call.parameters["uid"] ?: return@put call.respondText(
-                "Missing uid",
-                status = HttpStatusCode.BadRequest
-            )
-            val id = call.parameters["id"] ?: return@put call.respondText(
-                "Missing id",
+        put("{cid}") {
+            val cid = call.parameters["cid"] ?: return@put call.respondText(
+                "Missing cid",
                 status = HttpStatusCode.BadRequest
             )
             val updatedItem = call.receive<CartItem>()
-//            val cart = cartItems[uid.toInt()]
-//            if (cart != null) {
-//                cart.contents[updatedItem.id] = updatedItem
-//            }
-            call.respondText("Item added to the cart correctly", status = HttpStatusCode.OK)
+            val result = repo.updateCartById(cid, updatedItem)
+            if (result.status == Status.SUCCESS) {
+                call.respond(HttpStatusCode(200, "OK"), result.data!!)
+            } else {
+                call.respondText(result.message, status = HttpStatusCode.OK)
+            }
         }
 
-        delete("{uid}") {
-            val uid = call.parameters["uid"] ?: return@delete call.respondText(
-                "Missing uid",
+        delete("{cid}") {
+            val cid = call.parameters["cid"] ?: return@delete call.respondText(
+                "Missing cid",
                 status = HttpStatusCode.BadRequest
             )
-//            cartItems.remove(uid.toInt())
-            call.respondText("All items removed successfully from the cart", status = HttpStatusCode.OK)
+
+            val result = repo.deleteCartById(cid)
+            if (result.status == Status.SUCCESS) {
+                call.respond(HttpStatusCode(200, "OK"), result.message)
+            } else {
+                call.respondText(result.message, status = HttpStatusCode.OK)
+            }
         }
 
-        delete("{uid}/{id}") {
-            val uid = call.parameters["uid"] ?: return@delete call.respondText(
-                "Missing uid",
+        delete("{cid}/{id}") {
+            val cid = call.parameters["cid"] ?: return@delete call.respondText(
+                "Missing cid",
                 status = HttpStatusCode.BadRequest
             )
             val id = call.parameters["id"] ?: return@delete call.respondText(
                 "Missing id",
                 status = HttpStatusCode.BadRequest
             )
-            call.respondText("Item removed successfully from the cart", status = HttpStatusCode.OK)
+            val result = repo.removeItemFromCart(cid, id.toInt())
+            if (result.status == Status.SUCCESS) {
+                call.respond(HttpStatusCode(200, "OK"), result.data!!)
+            } else {
+                call.respondText(result.message, status = HttpStatusCode.OK)
+            }
         }
-
-        //----------------------------------------------developer routes------------------------------------------------
-
 
         delete("/list") {
             val result = repo.removeAllCarts()

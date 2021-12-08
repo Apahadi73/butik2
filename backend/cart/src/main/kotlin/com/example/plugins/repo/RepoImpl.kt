@@ -1,6 +1,7 @@
 package com.example.plugins.repo
 
 import RepoResult
+import com.example.plugins.core.calculateCartTotal
 import com.example.plugins.database.initDb
 import com.example.plugins.models.Cart
 import com.example.plugins.models.CartItem
@@ -30,20 +31,24 @@ class RepoImpl : Repo {
     override suspend fun addNewItemToCart(cid: String, newCartItem: CartItem): RepoResult<Cart> {
         return try {
             var cart = db.findOne(Cart::cid eq cid)
-            println("reached here")
             // update the cart if it already exists
             if (cart != null) {
-                cart.contents[newCartItem.id] = newCartItem
-                cart.total += newCartItem.price * newCartItem.quantity
-                db.findOneAndReplace(Cart::cid eq cid, cart, FindOneAndReplaceOptions())
+                if (cart.items.containsKey(newCartItem.id)) {
+                    RepoResult.error("Item already added to the cart.", null)
+                } else {
+                    cart.items[newCartItem.id] = newCartItem
+                    cart.total = calculateCartTotal(cart)
+                    db.findOneAndReplace(Cart::cid eq cid, cart, FindOneAndReplaceOptions())
+                    RepoResult.success("New Item successfully added to the cart.", cart)
+                }
             }
             // or else create a new cart
             else {
                 val total = newCartItem.price * newCartItem.quantity
                 cart = Cart(cid, hashMapOf(newCartItem.id to newCartItem), total)
                 db.insertOne(cart)
+                RepoResult.success("New Item successfully added to the cart.", cart)
             }
-            RepoResult.success("New Item successfully added to the cart.", cart)
         } catch (e: Exception) {
             RepoResult.error(e.localizedMessage, null)
         }
@@ -54,33 +59,71 @@ class RepoImpl : Repo {
             val carts = db.find().toList()
             RepoResult.success("Fetched all carts", carts)
         } catch (e: Exception) {
-            RepoResult.error("Failed to fetch carts.", null)
+            RepoResult.error(e.localizedMessage, null)
         }
     }
 
     override suspend fun getCartById(cid: String): RepoResult<Cart> {
         return try {
             val cart = db.findOne(Cart::cid eq cid)
-            RepoResult.success("Fetched cart successfully.", cart)
+            if (cart == null) {
+                RepoResult.error("No such cart found.", null)
+            } else {
+                RepoResult.success("Fetched cart successfully.", cart)
+            }
         } catch (e: Exception) {
-            RepoResult.error("Failed to fetch cart.", null)
+            RepoResult.error(e.localizedMessage, null)
         }
     }
 
     override suspend fun updateCartById(cid: String, updatedCartItem: CartItem): RepoResult<Cart> {
-        TODO("Not yet implemented")
+        return try {
+            val cart = db.findOne(Cart::cid eq cid)
+            // update the cart if it already exists
+            if (cart != null) {
+                cart.items[updatedCartItem.id] = updatedCartItem
+                cart.total = calculateCartTotal(cart)
+                db.findOneAndReplace(Cart::cid eq cid, cart, FindOneAndReplaceOptions())
+                RepoResult.success("Item successfully updated in the cart.", cart)
+            }
+            // or else create a new cart
+            else {
+                RepoResult.error("No cart found.", null)
+            }
+        } catch (e: Exception) {
+            RepoResult.error(e.localizedMessage, null)
+        }
     }
 
-//    override suspend fun updateCart(cartItem: CartItem): Cart {
-//        TODO("update cart")
-//    }
-
-    override suspend fun removeItemFromCart(cartItem: CartItem): Cart {
-        TODO("remove item from the cart")
+    override suspend fun deleteCartById(cid: String): RepoResult<Unit> {
+        return try {
+            db.deleteOne(Cart::cid eq cid)
+            RepoResult.success("Successfully deleted cart.", null)
+        } catch (e: Exception) {
+            RepoResult.error(e.localizedMessage, null)
+        }
     }
 
-    override suspend fun deleteCart(uid: String): Boolean {
-        TODO("delete whole cart")
+    override suspend fun removeItemFromCart(cid: String, id: Int): RepoResult<Cart> {
+        return try {
+            val cart = db.findOne(Cart::cid eq cid)
+            if (cart != null) {
+                if (cart.items.containsKey(id)) {
+                    cart.items.remove(id)
+                    cart.total = calculateCartTotal(cart)
+                    db.findOneAndReplace(Cart::cid eq cid, cart, FindOneAndReplaceOptions())
+                    RepoResult.success("Item successfully removed from the cart.", cart)
+                } else {
+                    RepoResult.error("No such item found in the cart.", null)
+                }
+            }
+            // or else create a new cart
+            else {
+                RepoResult.error("No cart found.", null)
+            }
+        } catch (e: Exception) {
+            RepoResult.error(e.localizedMessage, null)
+        }
     }
 
     override suspend fun removeAllCarts(): RepoResult<Unit> {
