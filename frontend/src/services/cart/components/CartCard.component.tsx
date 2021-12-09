@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { CartItemModel, ProductModel } from "../repo/models/CartItem";
+import { CartItemModel } from "../repo/models/CartItem";
 
 import { Text, TextType } from "../../../components/typography/Text.component";
 import {
