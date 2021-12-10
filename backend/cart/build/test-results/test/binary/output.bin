@@ -1,5 +1,22 @@
-Å2021-12-09 17:18:15.299 [Test worker @coroutine#1] INFO  ktor.test - Autoreload is disabled because the development mode is off.
-k2021-12-09 17:18:15.304 [Test worker @coroutine#1] INFO  ktor.test - Application started in 0.025 seconds.
-<RepoResult(status=ERROR, data=null, message=No cart found.)
-t2021-12-09 17:18:15.401 [Test worker] INFO  ktor.test - Autoreload is disabled because the development mode is off.
-^2021-12-09 17:18:15.401 [Test worker] INFO  ktor.test - Application started in 0.001 seconds.
+Å2021-12-09 22:40:59.818 [Test worker @coroutine#1] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+k2021-12-09 22:40:59.823 [Test worker @coroutine#1] INFO  ktor.test - Application started in 0.026 seconds.
+Å2021-12-09 22:41:00.085 [Test worker @coroutine#6] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+k2021-12-09 22:41:00.085 [Test worker @coroutine#6] INFO  ktor.test - Application started in 0.001 seconds.
+Ç2021-12-09 22:41:00.108 [Test worker @coroutine#11] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+j2021-12-09 22:41:00.108 [Test worker @coroutine#11] INFO  ktor.test - Application started in 0.0 seconds.
+Ç2021-12-09 22:41:00.114 [Test worker @coroutine#16] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+l2021-12-09 22:41:00.115 [Test worker @coroutine#16] INFO  ktor.test - Application started in 0.001 seconds.
+	Ç2021-12-09 22:41:00.119 [Test worker @coroutine#21] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+	j2021-12-09 22:41:00.119 [Test worker @coroutine#21] INFO  ktor.test - Application started in 0.0 seconds.
+
+t2021-12-09 22:41:00.124 [Test worker] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+
+\2021-12-09 22:41:00.124 [Test worker] INFO  ktor.test - Application started in 0.0 seconds.
+Ç2021-12-09 22:41:00.128 [Test worker @coroutine#30] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+j2021-12-09 22:41:00.128 [Test worker @coroutine#30] INFO  ktor.test - Application started in 0.0 seconds.
+Ç2021-12-09 22:41:00.133 [Test worker @coroutine#35] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+j2021-12-09 22:41:00.133 [Test worker @coroutine#35] INFO  ktor.test - Application started in 0.0 seconds.
+Ç2021-12-09 22:41:00.138 [Test worker @coroutine#40] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+j2021-12-09 22:41:00.138 [Test worker @coroutine#40] INFO  ktor.test - Application started in 0.0 seconds.
+Ç2021-12-09 22:41:00.143 [Test worker @coroutine#45] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+j2021-12-09 22:41:00.143 [Test worker @coroutine#45] INFO  ktor.test - Application started in 0.0 seconds.

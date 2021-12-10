@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.ApplicationTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-12-09T23:18:14" hostname="magladroth" time="0.945">
+<testsuite name="com.example.ApplicationTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-12-10T04:40:58" hostname="magladroth" time="1.171">
   <properties/>
-  <testcase name="return empty list of cart" classname="com.example.ApplicationTest" time="0.94"/>
-  <testcase name="test welcome page" classname="com.example.ApplicationTest" time="0.005"/>
-  <system-out><![CDATA[2021-12-09 17:18:15.299 [Test worker @coroutine#1] INFO  ktor.test - Autoreload is disabled because the development mode is off.
-2021-12-09 17:18:15.304 [Test worker @coroutine#1] INFO  ktor.test - Application started in 0.025 seconds.
-RepoResult(status=ERROR, data=null, message=No cart found.)
-2021-12-09 17:18:15.401 [Test worker] INFO  ktor.test - Autoreload is disabled because the development mode is off.
-2021-12-09 17:18:15.401 [Test worker] INFO  ktor.test - Application started in 0.001 seconds.
+  <testcase name="delete an item from a cart" classname="com.example.ApplicationTest" time="1.107"/>
+  <testcase name="get a list of carts" classname="com.example.ApplicationTest" time="0.024"/>
+  <testcase name="delete an invalid item from a cart" classname="com.example.ApplicationTest" time="0.006"/>
+  <testcase name="get an empty list of cart" classname="com.example.ApplicationTest" time="0.005"/>
+  <testcase name="get a cart by id" classname="com.example.ApplicationTest" time="0.005"/>
+  <testcase name="test welcome page" classname="com.example.ApplicationTest" time="0.004"/>
+  <testcase name="remove all the carts" classname="com.example.ApplicationTest" time="0.005"/>
+  <testcase name="delete a cart by id" classname="com.example.ApplicationTest" time="0.005"/>
+  <testcase name="delete an item from an invalid cart" classname="com.example.ApplicationTest" time="0.005"/>
+  <testcase name="get a cart with invalid id" classname="com.example.ApplicationTest" time="0.004"/>
+  <system-out><![CDATA[2021-12-09 22:40:59.818 [Test worker @coroutine#1] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:40:59.823 [Test worker @coroutine#1] INFO  ktor.test - Application started in 0.026 seconds.
+2021-12-09 22:41:00.085 [Test worker @coroutine#6] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.085 [Test worker @coroutine#6] INFO  ktor.test - Application started in 0.001 seconds.
+2021-12-09 22:41:00.108 [Test worker @coroutine#11] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.108 [Test worker @coroutine#11] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.114 [Test worker @coroutine#16] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.115 [Test worker @coroutine#16] INFO  ktor.test - Application started in 0.001 seconds.
+2021-12-09 22:41:00.119 [Test worker @coroutine#21] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.119 [Test worker @coroutine#21] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.124 [Test worker] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.124 [Test worker] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.128 [Test worker @coroutine#30] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.128 [Test worker @coroutine#30] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.133 [Test worker @coroutine#35] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.133 [Test worker @coroutine#35] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.138 [Test worker @coroutine#40] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.138 [Test worker @coroutine#40] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.143 [Test worker @coroutine#45] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.143 [Test worker @coroutine#45] INFO  ktor.test - Application started in 0.0 seconds.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

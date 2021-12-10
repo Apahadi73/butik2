@@ -7,6 +7,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class CoreTest {
 
@@ -20,21 +21,21 @@ class CoreTest {
                     1,
                     "Camera",
                     1,
-                    100.0,
+                    100.10,
                     "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
                 ),
                 2 to CartItem(
                     2,
                     "Camera",
                     1,
-                    100.0,
+                    100.10,
                     "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
                 ),
                 3 to CartItem(
                     3,
                     "Camera",
                     2,
-                    100.0,
+                    100.10,
                     "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"
                 )
             ),
@@ -49,6 +50,12 @@ class CoreTest {
     @Test
     fun `calculate cart total correctly`() {
         val total = calculateCartTotal(cart)
-        assertEquals(total, 400.0)
+        assertEquals(total, 400.4)
+    }
+
+    @Test
+    fun `calculate cart total correctly 2`() {
+        val total = calculateCartTotal(cart)
+        assertNotEquals(total, 401.001)
     }
 }

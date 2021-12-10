@@ -89,7 +89,6 @@ class ApiServiceImpl(kodein: Kodein) : ApiService {
 
     override suspend fun deleteCartById(cid: String): RepoResult<Unit> {
         return try {
-            //TODO
             db.deleteOne(cid)
             RepoResult.success("Successfully deleted cart.", null)
         } catch (e: Exception) {
