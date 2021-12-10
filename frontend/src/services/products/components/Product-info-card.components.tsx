@@ -33,6 +33,7 @@ const ProductInfoCard = ({
       id: product.id,
     });
   };
+  console.log(product);
   return (
     <ProductCardCover onPress={onCardPressedHandler}>
       <ProductCard elevation={1}>

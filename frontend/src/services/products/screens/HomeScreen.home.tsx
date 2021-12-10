@@ -7,9 +7,13 @@ import {
   AuthStackParamList,
   HomeStackParamList,
 } from "../../../infrastructure/navigation/types";
-import { HomeScreenContainer } from "../components/Product-info-card.styles";
+import {
+  HomeScreenContainer,
+  ProductList,
+} from "../components/Product-info-card.styles";
 import ProductInfoCard from "../components/Product-info-card.components";
 import { AuthButton } from "../../authentication/components/Authentication.components";
+import { ProductModel } from "../repo/models/ProductModel";
 
 export interface HomeNavigatorProps {
   navigation: StackNavigationProp<HomeStackParamList, "HomeScreen">;
@@ -28,16 +32,24 @@ const HomeScreen: React.FC<HomeNavigatorProps> = ({ navigation }) => {
     <>
       <HomeScreenContainer>
         <Text variant={TextType.header}>Find the stuff you love</Text>
-        {products &&
-          products.map((product, index) => {
-            return (
-              <ProductInfoCard
-                product={product}
-                key={index}
-                navigation={navigation}
-              />
-            );
-          })}
+        {products && (
+          // products.map((product, index) => {
+          //   return (
+          //     <ProductInfoCard
+          //       product={product}
+          //       key={index}
+          //       navigation={navigation}
+          //     />
+          //   );
+          // })
+          <ProductList<React.ElementType>
+            data={products}
+            renderItem={({ product }: { product: ProductModel }) => (
+              <ProductInfoCard product={product} navigation={navigation} />
+            )}
+            keyExtractor={(item: ProductModel) => item.id}
+          />
+        )}
         <AuthButton onPress={() => fetchProducts(0, 10)}>Fetch</AuthButton>
       </HomeScreenContainer>
     </>
