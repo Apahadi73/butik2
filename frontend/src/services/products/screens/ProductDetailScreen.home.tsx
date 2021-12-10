@@ -16,7 +16,6 @@ import {
 } from "../../../components/spacer/spacer.component";
 import { View } from "../../../components_r/Themed";
 import {
-  Button,
   RowContainerSpacer,
   SpaceBetweenRow,
 } from "../../../components/App.styles";
@@ -41,10 +40,6 @@ const ProductDetailsScreen: React.FC<ProductDetailScreenNavigatorProps> = ({
     console.log(route.params.id);
     fetchProductById(route.params.id ? route.params.id : 1);
   }, [navigation]);
-
-  // useEffect(() => {
-  //   console.log("product->", product);
-  // }, [product]);
 
   const onAddToCartBtnPressed = () => {
     if (product) {

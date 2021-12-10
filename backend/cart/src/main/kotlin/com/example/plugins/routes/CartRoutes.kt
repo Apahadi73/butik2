@@ -26,6 +26,7 @@ fun Route.cartRouting(apiService: ApiService) {
 
         get("/list") {
             val result = apiService.getCarts()
+            println(result)
             if (result.status == Status.SUCCESS) {
                 call.respond(HttpStatusCode(200, "OK"), result.data!!)
             } else {

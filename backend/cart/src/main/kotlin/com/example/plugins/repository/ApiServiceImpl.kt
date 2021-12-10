@@ -44,9 +44,8 @@ class ApiServiceImpl(kodein: Kodein) : ApiService {
 
     override suspend fun getCarts(): RepoResult<List<Cart>> {
         return try {
-            // TODO
             val carts = db.find()
-            if (carts != null && carts.isEmpty()) {
+            if (carts == null || carts.isEmpty()) {
                 RepoResult.error("No cart found.", null)
             } else {
                 RepoResult.success("Fetched all carts", carts)

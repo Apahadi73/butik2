@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { CartItemModel } from "../repo/models/CartItem";
 
@@ -17,13 +17,21 @@ interface CartCardProps {
 }
 
 const CartInfoCard = ({ cartItem }: CartCardProps): JSX.Element => {
-  const { addItemToCart, DecreaseIteminCart } = useContext(CartContext);
+  const { addItemToCart, DecreaseIteminCart, cartItems } =
+    useContext(CartContext);
+
   return (
     <CartCard elevation={1}>
       <RowContainerSpacer>
         <SpaceBetweenRow>
           <ProductThumbnail source={{ uri: cartItem.image }} />
-          <Text variant={TextType.body}>{cartItem.name}</Text>
+          <Text
+            variant={TextType.body}
+            ellipsizeMode="middle"
+            style={{ width: 100 }}
+          >
+            {cartItem.name}
+          </Text>
           <FAIcon name="plus" color={themeColor.ui.primary} />
           <Text variant={TextType.body}>
             {cartItem.number ? cartItem.number : 1}

@@ -11,9 +11,7 @@ import io.ktor.server.netty.*
 fun main() {
     embeddedServer(Netty, port = 5003, host = "localhost") {
         val kodein = configureDependency()
-        
         initDB(kodein)
-
         configureRouting(kodein)
         configureSerialization()
         configureMonitoring()
