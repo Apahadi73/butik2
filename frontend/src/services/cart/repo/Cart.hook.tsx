@@ -40,6 +40,7 @@ const useCartHook = () => {
     });
     setCartItems(updatedCart);
   };
+
   return {
     isLoading,
     error,

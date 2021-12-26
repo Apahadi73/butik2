@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">10</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.996s</div>
+<div class="counter">1.170s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,8 +78,53 @@
 </tr>
 </thead>
 <tr>
+<td class="success">delete a cart by id</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delete an invalid item from a cart</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delete an item from a cart</td>
+<td class="success">1.107s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">delete an item from an invalid cart</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">get a cart by id</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">get a cart with invalid id</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">get a list of carts</td>
+<td class="success">0.024s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">get an empty list of cart</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">remove all the carts</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">test welcome page</td>
-<td class="success">0.996s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,17 +132,26 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2021-12-08 00:36:53.214 [Test worker] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27020], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms'}
-2021-12-08 00:36:53.266 [Test worker] DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=localhost:27020, type=UNKNOWN, state=CONNECTING}]
-2021-12-08 00:36:53.332 [cluster-ClusterId{value='61b0528597b2320f92f584e9', description='null'}-localhost:27020] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:175}] to localhost:27020
-2021-12-08 00:36:53.331 [cluster-rtt-ClusterId{value='61b0528597b2320f92f584e9', description='null'}-localhost:27020] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:174}] to localhost:27020
-2021-12-08 00:36:53.332 [cluster-ClusterId{value='61b0528597b2320f92f584e9', description='null'}-localhost:27020] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27020, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=5, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=null, roundTripTimeNanos=32644652}
-2021-12-08 00:36:53.336 [cluster-ClusterId{value='61b0528597b2320f92f584e9', description='null'}-localhost:27020] DEBUG org.mongodb.driver.connection - Marking the connection pool for ServerId{clusterId=ClusterId{value='61b0528597b2320f92f584e9', description='null'}, address=localhost:27020} as 'ready'
-2021-12-08 00:36:53.337 [MaintenanceTimer-1-thread-1] DEBUG org.mongodb.driver.connection - Pruning pooled connections to localhost:27020
-2021-12-08 00:36:53.338 [cluster-ClusterId{value='61b0528597b2320f92f584e9', description='null'}-localhost:27020] DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=STANDALONE, servers=[{address=localhost:27020, type=STANDALONE, roundTripTime=32.6 ms, state=CONNECTED}]
-2021-12-08 00:36:53.499 [Test worker] INFO  ktor.test - Autoreload is disabled because the development mode is off.
-2021-12-08 00:36:53.504 [Test worker] INFO  ktor.test - Application started in 0.063 seconds.
-----------------------------------Connected to the database----------------------------------
+<pre>2021-12-09 22:40:59.818 [Test worker @coroutine#1] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:40:59.823 [Test worker @coroutine#1] INFO  ktor.test - Application started in 0.026 seconds.
+2021-12-09 22:41:00.085 [Test worker @coroutine#6] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.085 [Test worker @coroutine#6] INFO  ktor.test - Application started in 0.001 seconds.
+2021-12-09 22:41:00.108 [Test worker @coroutine#11] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.108 [Test worker @coroutine#11] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.114 [Test worker @coroutine#16] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.115 [Test worker @coroutine#16] INFO  ktor.test - Application started in 0.001 seconds.
+2021-12-09 22:41:00.119 [Test worker @coroutine#21] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.119 [Test worker @coroutine#21] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.124 [Test worker] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.124 [Test worker] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.128 [Test worker @coroutine#30] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.128 [Test worker @coroutine#30] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.133 [Test worker @coroutine#35] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.133 [Test worker @coroutine#35] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.138 [Test worker @coroutine#40] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.138 [Test worker @coroutine#40] INFO  ktor.test - Application started in 0.0 seconds.
+2021-12-09 22:41:00.143 [Test worker @coroutine#45] INFO  ktor.test - Autoreload is disabled because the development mode is off.
+2021-12-09 22:41:00.143 [Test worker @coroutine#45] INFO  ktor.test - Application started in 0.0 seconds.
 </pre>
 </span>
 </div>
@@ -109,7 +163,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.1</a> at Dec 8, 2021, 12:36:54 AM</p>
+<a href="http://www.gradle.org">Gradle 7.1</a> at Dec 9, 2021, 10:41:00 PM</p>
 </div>
 </div>
 </body>

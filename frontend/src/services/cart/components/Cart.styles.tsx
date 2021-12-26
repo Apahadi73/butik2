@@ -3,8 +3,9 @@ import { Button, TextInput } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
 import { themeColor } from "../../../infrastructure/themes/ThemeColor.themes";
 import { Card } from "react-native-paper";
+import { FlatList } from "react-native";
 
-export const CartScreenContainer = styled.ScrollView`
+export const CartScreenContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${(props) => props.theme.space[4]};
   margin-top: ${(props) => props.theme.space[2]};
@@ -30,3 +31,7 @@ export const CheckoutButton = styled(Button).attrs({
   margin: ${(props) => props.theme.space[2]};
   background-color: ${themeColor.ui.primary};
 `;
+
+export const CartList = styled(FlatList).attrs({
+  contentContainerStyle: {},
+})``;

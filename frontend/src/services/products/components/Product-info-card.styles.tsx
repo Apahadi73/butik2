@@ -3,8 +3,9 @@ import { Button, TextInput } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
 import { themeColor } from "../../../infrastructure/themes/ThemeColor.themes";
 import { Card } from "react-native-paper";
+import { FlatList } from "react-native";
 
-export const HomeScreenContainer = styled.ScrollView`
+export const HomeScreenContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${(props) => props.theme.space[4]};
   margin-top: ${(props) => props.theme.space[2]};
@@ -50,3 +51,7 @@ export const SectionEnd = styled.View`
   flex-direction: row;
   justify-content: flex-end;
 `;
+
+export const ProductList = styled(FlatList).attrs({
+  contentContainerStyle: {},
+})``;

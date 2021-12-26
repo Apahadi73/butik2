@@ -4,10 +4,9 @@ import com.example.plugins.models.Cart
 import com.example.plugins.models.CartItem
 import org.litote.kmongo.coroutine.CoroutineCollection
 
-suspend fun seedDummyCarts(db: CoroutineCollection<Cart>) {
 
 // stores cart items
-    val cartItems: List<Cart> = mutableListOf<Cart>(
+val cartItems: List<Cart> = mutableListOf<Cart>(
         Cart(
             "1", hashMapOf(
                 1 to CartItem(
@@ -61,7 +60,3 @@ suspend fun seedDummyCarts(db: CoroutineCollection<Cart>) {
             2433.21
         )
     )
-
-    db.insertMany(cartItems)
-    println("Dummy carts data inserted")
-}
