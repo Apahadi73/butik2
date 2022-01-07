@@ -5,10 +5,6 @@ from utilities.seeder import seed_products
 # create our application
 app = FastAPI(title="Products Service")
 
-@app.get("/")
-def welcome():
-    return "welcome to products service"
-
 # sets up router
 app.include_router(r.router)
 

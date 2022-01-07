@@ -14,16 +14,17 @@ router = APIRouter(
 
 @router.get("/products")
 def index():
-    return "Welcome to the product service"
+    return "Welcome to the product service v1"
 
 @router.get("/products/list", response_model=List[schemas.Product])
 def get_products(skip: int = 0, limit: int = 100, db: Session = Depends(con.get_db)):
+    print("reached here")
     products = crud.get_products(db, skip=skip, limit=limit)
     if not products:
         raise HTTPException(status_code=404, detail="Products not found")
     return products
 
-@router.post("/products/", response_model=schemas.Product)
+@router.post("/products", response_model=schemas.Product)
 def create_product(
     product: schemas.ProductCreate, db: Session = Depends(con.get_db)
 ):

@@ -14,4 +14,3 @@ def seed_products():
         # step 4: refresh your instance (so that it contains any new data from the database, like the generated ID).
         db.refresh(db_product)
         db.close()
-    
