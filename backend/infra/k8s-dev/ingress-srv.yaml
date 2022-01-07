@@ -16,19 +16,7 @@ spec:
             backend:
               serviceName: products-srv
               servicePort: 5000
-          # - path: /api/payments/?(.*)
-          #   backend:
-          #     serviceName: payments-srv
-          #     servicePort: 5000
           - path: /api/v1/authentication/?(.*)
             backend:
               serviceName: auth-srv
               servicePort: 5000
-          # - path: /api/orders/?(.*)
-          #   backend:
-          #     serviceName: orders-srv
-          #     servicePort: 5000
-          # - path: /?(.*)
-          #   backend:
-          #     serviceName: client-srv
-          #     servicePort: 5000

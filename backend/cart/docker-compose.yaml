@@ -2,6 +2,11 @@ version: "3.9"
 
 services:
   cart-mongod:
-    image: "apahadi73/cart-mongod"
+    image: apahadi73/mongod
     ports:
       - "27020:27020"
+
+  cart-server:
+    build: .
+    ports:
+      - "5004:5004"

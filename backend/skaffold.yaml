@@ -25,14 +25,14 @@ build:
     #     manual:
     #       - src: "**/*.js"
     #         dest: .
-    - image: apahadi/products
-      context: products
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.py"
-            dest: .
+    # - image: apahadi73/products
+    #   context: products
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "src/**/*.py"
+    #         dest: .
     # - image: apahadi/orders
     #   context: orders
     #   docker:
