@@ -47,7 +47,6 @@ Home.getInitialProps = async (context, client) => {
   } catch (err) {
     error = err;
   }
-  console.log(products);
   return { products, error };
 };
 
