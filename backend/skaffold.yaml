@@ -9,30 +9,30 @@ build:
   local:
     push: false
   artifacts:
-    # - image: apahadi/auth
-    #   context: auth
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: "src/**/*.ts"
-    #         dest: .
-    # - image: apahadi/ticketing-client
-    #   context: client
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: "**/*.js"
-    #         dest: .
-    # - image: apahadi73/products
-    #   context: products
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: "src/**/*.py"
-    #         dest: .
+    - image: apahadi73/auth-go
+      context: authentication
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.go"
+            dest: .
+    - image: apahadi73/products
+      context: products
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.py"
+            dest: .
+    - image: apahadi73/butik-client
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
     # - image: apahadi/orders
     #   context: orders
     #   docker:

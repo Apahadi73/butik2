@@ -22,7 +22,7 @@ func main()  {
 	// }
 
 	// sets up database
-	dbaseAdapter,err :=db.NewAdapter()
+	dbaseAdapter,err := db.NewAdapter()
 	if err!=nil {
 		log.Fatalf("failed to initiate dbase connection: %v",err)
 	}
