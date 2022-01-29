@@ -5,9 +5,10 @@ import { Col, Row } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Meta from "../components/Meta";
+import Product from "../components/Product";
 
-const Home = (data) => {
-  const loading = true;
+const Home = ({ products, error }) => {
+  let loading = false;
   return (
     <div>
       <Head>
@@ -16,32 +17,38 @@ const Home = (data) => {
       </Head>
       <>
         <Meta />
-        {/* {!keyword ? (
-          <ProductCarousel />
-        ) : (
-          <Link to="/" className="btn btn-light">
-            Go Back
-          </Link>
-        )} */}
-        {/* {loading ? (
+        {loading ? (
           <Loader />
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
           <>
-            <p>Amir</p>
+            <Row>
+              {products &&
+                products.map((product) => (
+                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                    <Product product={product} />
+                  </Col>
+                ))}
+            </Row>
           </>
-        )} */}
-        <div>Amir123</div>
+        )}
       </>
     </div>
   );
 };
 
 Home.getInitialProps = async (context, client) => {
-  let { data } = await client.get("/api/v1/products/list");
-  console.log(data);
-  return data;
+  let products;
+  let error;
+  try {
+    let { data } = await client.get("/api/v1/products/list");
+    products = data == null ? [] : data;
+  } catch (err) {
+    error = err;
+  }
+  console.log(products);
+  return { products, error };
 };
 
 export default Home;

@@ -1,69 +1,81 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
-import { logout } from "../actions/userActions";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const dispatch = useDispatch();
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   const logoutHandler = () => {
-    dispatch(logout());
+    // dispatch(logout());
   };
+
+  let userInfo = null;
 
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
+          <Link href="/">
             <Navbar.Brand>Butik</Navbar.Brand>
-          </LinkContainer>
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
+            <Nav className="ms-auto">
               <div className="mx-3">
-                <Route
+                {/* <Route
                   render={({ history }) => <SearchBox history={history} />}
-                />
+                /> */}
               </div>
-              <LinkContainer to="/cart">
+              <Link href="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    style={{
+                      fontSize: "0.8rem",
+                      marginRight: "0.5rem",
+                      color: "white",
+                    }}
+                  />
+                  Cart
                 </Nav.Link>
-              </LinkContainer>
+              </Link>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
-                  <LinkContainer to="/profile">
+                  <Link href="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
+                  </Link>
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
                   </NavDropdown.Item>
                   {userInfo && userInfo.isAdmin && (
                     <React.Fragment>
-                      <LinkContainer to="/admin/userlist">
+                      <Link href="/admin/userlist">
                         <NavDropdown.Item>Users</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/productlist">
+                      </Link>
+                      <Link href="/admin/productlist">
                         <NavDropdown.Item>Products</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/admin/orderlist">
+                      </Link>
+                      <Link href="/admin/orderlist">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
-                      </LinkContainer>
+                      </Link>
                     </React.Fragment>
                   )}
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login">
+                <Link href="/login">
                   <Nav.Link>
-                    <i className="fas fa-user"></i> Sign In
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      style={{
+                        fontSize: "0.8rem",
+                        marginRight: "0.5rem",
+                        color: "white",
+                      }}
+                    />
+                    Sign In
                   </Nav.Link>
-                </LinkContainer>
+                </Link>
               )}
             </Nav>
           </Navbar.Collapse>
