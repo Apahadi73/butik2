@@ -2,6 +2,7 @@ import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { Col, Row } from "react-bootstrap";
+import buildClient from "../api/build-client";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Meta from "../components/Meta";
@@ -26,7 +27,7 @@ const Home = ({ products, error }) => {
             <Row>
               {products &&
                 products.map((product) => (
-                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                  <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
                     <Product product={product} />
                   </Col>
                 ))}

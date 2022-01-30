@@ -6,12 +6,12 @@ import Link from "next/link";
 const Product = ({ product }) => {
   return (
     <Card className="my-3 p-3 rounded">
-      <Link href={`/product/${product._id}`}>
+      <Link href={`/product/${product.id}`}>
         <Card.Img src={product.image} variant="top" />
       </Link>
 
       <Card.Body>
-        <Link href={`/product/${product._id}`}>
+        <Link href={`/product/${product.id}`}>
           <Card.Title as="div">
             <strong>{product.name}</strong>
           </Card.Title>

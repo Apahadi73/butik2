@@ -8,7 +8,7 @@ dummy_products = [
     "price": 249.99,
     "count_in_stock": 3,
     "rating": 4,
-    "num_reviews": 0,
+    "num_reviews": 3,
     "owner_id":"1"
   },
   {
@@ -20,7 +20,7 @@ dummy_products = [
     "price": 49.99,
     "count_in_stock": 23,
     "rating": 4,
-    "num_reviews": 0,
+    "num_reviews": 10,
     "owner_id":"1"
   },
   {
