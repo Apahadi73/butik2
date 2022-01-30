@@ -63,8 +63,8 @@ const Header = () => {
                   )}
                 </NavDropdown>
               ) : (
-                <Link href="/login">
-                  <Nav.Link>
+                <Link as="/account/login" href="/en/checkout" passHref>
+                  <Nav.Link onClick={() => console.log("clicked")}>
                     <FontAwesomeIcon
                       icon={faUser}
                       style={{
