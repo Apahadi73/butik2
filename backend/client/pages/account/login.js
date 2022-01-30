@@ -27,23 +27,20 @@ const LoginScreen = ({ location, history }) => {
     },
   });
 
-  const { token, getToken } = useLocalStorage();
-
   useEffect(() => {
-    getToken();
+    const token = localStorage.getItem("token");
     if (token) {
       router.push("/");
     }
-  }, [token]);
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     validateForm(email, password);
     if (!error) {
       const res = await doRequest();
-      console.table(res);
-      if (res && res.token) {
-        localStorage.setItem("token", res.token);
+      if (res) {
+        localStorage.setItem("userInfo", JSON.stringify(res));
         router.push("/");
       }
     }

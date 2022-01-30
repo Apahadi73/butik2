@@ -29,14 +29,12 @@ const RegisterScreen = ({ location, history }) => {
     },
   });
 
-  const { token, getToken } = useLocalStorage();
-
   useEffect(() => {
-    getToken();
+    const token = localStorage.getItem("token");
     if (token) {
       router.push("/");
     }
-  }, [token]);
+  }, []);
 
   const loading = false;
   const router = useRouter();
@@ -46,9 +44,8 @@ const RegisterScreen = ({ location, history }) => {
     validateForm(email, password, name, confirmPassword);
     if (!error) {
       const res = await doRequest();
-      console.table(res);
-      if (res && res.token) {
-        localStorage.setItem("token", res.token);
+      if (res) {
+        localStorage.setItem("userInfo", JSON.stringify(res));
         router.push("/");
       }
     }

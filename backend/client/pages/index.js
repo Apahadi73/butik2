@@ -1,6 +1,7 @@
 import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
+import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import buildClient from "../api/build-client";
 import Loader from "../components/Loader";
@@ -10,6 +11,12 @@ import Product from "../components/Product";
 
 const Home = ({ products, error }) => {
   let loading = false;
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    console.table(userInfo);
+  }, []);
+
   return (
     <div>
       <Head>
