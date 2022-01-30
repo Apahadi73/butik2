@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
+import useRequest from "../../hooks/useRequest";
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -15,11 +16,25 @@ const LoginScreen = ({ location, history }) => {
   const loading = false;
   const router = useRouter();
 
-  const submitHandler = (e) => {
+  const { doRequest, errors } = useRequest({
+    url: "/api/v1/authentication/login",
+    method: "post",
+    body: {
+      email,
+      password,
+    },
+  });
+
+  const submitHandler = async (e) => {
     e.preventDefault();
     validateForm(email, password);
     if (!error) {
-      console.table({ email, password });
+      const res = await doRequest();
+      console.table(res);
+      if (res && res.token) {
+        localStorage.setItem("token", res.token);
+        router.push("/");
+      }
     }
   };
 
@@ -39,6 +54,7 @@ const LoginScreen = ({ location, history }) => {
     <FormContainer>
       <h1 className="row justify-content-center">Login In</h1>
       {error && <Message variant="danger">{error}</Message>}
+      {errors}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
