@@ -8,6 +8,8 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
 import useRequest from "../../hooks/useRequest";
+import HTTP_METHOD from "../../constants/request-constants";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -19,13 +21,22 @@ const RegisterScreen = ({ location, history }) => {
 
   const { doRequest, errors } = useRequest({
     url: "/api/v1/authentication/register",
-    method: "post",
+    method: HTTP_METHOD.POST,
     body: {
       email,
       password,
       name,
     },
   });
+
+  const { token, getToken } = useLocalStorage();
+
+  useEffect(() => {
+    getToken();
+    if (token) {
+      router.push("/");
+    }
+  }, [token]);
 
   const loading = false;
   const router = useRouter();

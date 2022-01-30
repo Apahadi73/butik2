@@ -7,6 +7,8 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
 import useRequest from "../../hooks/useRequest";
+import HTTP_METHOD from "../../constants/request-constants";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -18,12 +20,21 @@ const LoginScreen = ({ location, history }) => {
 
   const { doRequest, errors } = useRequest({
     url: "/api/v1/authentication/login",
-    method: "post",
+    method: HTTP_METHOD.POST,
     body: {
       email,
       password,
     },
   });
+
+  const { token, getToken } = useLocalStorage();
+
+  useEffect(() => {
+    getToken();
+    if (token) {
+      router.push("/");
+    }
+  }, [token]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
