@@ -30,18 +30,6 @@ const ProductPage = ({ product }) => {
     // history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
-  const decreaseQty = () => {
-    if (qty > 0) {
-      setQty(qty - 1);
-    }
-  };
-
-  const increaseQty = () => {
-    if (qty < product.count_in_stock) {
-      setQty(qty + 1);
-    }
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
   };

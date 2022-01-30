@@ -33,6 +33,14 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
+    - image: apahadi73/butik-cart
+      context: cart
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.kt"
+            dest: .
     # - image: apahadi/orders
     #   context: orders
     #   docker:
