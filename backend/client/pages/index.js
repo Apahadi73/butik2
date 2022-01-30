@@ -12,11 +12,6 @@ import Product from "../components/Product";
 const Home = ({ products, error }) => {
   let loading = false;
 
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    console.table(userInfo);
-  }, []);
-
   return (
     <div>
       <Head>

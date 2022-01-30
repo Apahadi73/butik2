@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const Header = () => {
   const logoutHandler = () => {
     // dispatch(logout());
   };
 
-  let userInfo = null;
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const { userInfo, getUserInfo } = useLocalStorage();
 
   return (
     <header>

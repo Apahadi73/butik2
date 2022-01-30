@@ -1,28 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default () => {
-  const [token, setToken] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const getToken = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setToken(token);
+  const getUserInfo = () => {
+    const userLocal = localStorage.getItem("userInfo");
+    if (userLocal) {
+      setUserInfo(JSON.parse(userLocal));
     }
   };
 
-  const updateToken = (token) => {
-    localStorage.setItem("token", token);
-    setToken(token);
+  const updateUserInfo = (userInfo) => {
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    setUserInfo(userInfo);
   };
 
-  const removeToken = () => {
-    localStorage.removeItem("token");
-    setToken(null);
+  const removeUserInfo = () => {
+    localStorage.removeItem("userInfo");
+    setUserInfo(null);
   };
 
   const clearLocalStorage = () => {
     localStorage.clear();
   };
 
-  return { token, getToken, updateToken, removeToken, clearLocalStorage };
+  return {
+    userInfo,
+    getUserInfo,
+    updateUserInfo,
+    removeUserInfo,
+    clearLocalStorage,
+  };
 };

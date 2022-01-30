@@ -29,9 +29,11 @@ const RegisterScreen = ({ location, history }) => {
     },
   });
 
+  const { updateUserInfo, userInfo, getUserInfo } = useLocalStorage();
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
+    getUserInfo();
+    if (userInfo) {
       router.push("/");
     }
   }, []);
@@ -43,10 +45,14 @@ const RegisterScreen = ({ location, history }) => {
     e.preventDefault();
     validateForm(email, password, name, confirmPassword);
     if (!error) {
-      const res = await doRequest();
-      if (res) {
-        localStorage.setItem("userInfo", JSON.stringify(res));
-        router.push("/");
+      try {
+        const res = await doRequest();
+        if (res) {
+          updateUserInfo(res);
+          router.push("/");
+        }
+      } catch (err) {
+        setError(err.response.data.message);
       }
     }
   };
