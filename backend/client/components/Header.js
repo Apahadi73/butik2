@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useLocalStorage from "../state/hooks/useLocalStorage";
+import { AuthenticationContext } from "../state/repo/Authentication.context";
 
 const Header = () => {
+  const { currentUser, logout } = useContext(AuthenticationContext);
+
   const logoutHandler = () => {
-    // dispatch(logout());
+    logout();
   };
 
   useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  const { userInfo, getUserInfo } = useLocalStorage();
+    console.table(currentUser);
+  }, [currentUser]);
 
   return (
     <header>
@@ -45,15 +46,15 @@ const Header = () => {
                   Cart
                 </Nav.Link>
               </Link>
-              {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+              {currentUser ? (
+                <NavDropdown title={currentUser.name} id="username">
                   <Link href="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </Link>
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
                   </NavDropdown.Item>
-                  {userInfo && userInfo.isAdmin && (
+                  {currentUser && currentUser.isAdmin && (
                     <React.Fragment>
                       <Link href="/admin/userlist">
                         <NavDropdown.Item>Users</NavDropdown.Item>
@@ -69,7 +70,7 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <Link as="/account/login" href="/en/checkout" passHref>
-                  <Nav.Link onClick={() => console.log("clicked")}>
+                  <Nav.Link>
                     <FontAwesomeIcon
                       icon={faUser}
                       style={{

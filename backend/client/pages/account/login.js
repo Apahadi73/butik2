@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,61 +6,32 @@ import { useRouter } from "next/router";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
-import useRequest from "../../hooks/useRequest";
-import HTTP_METHOD from "../../constants/request-constants";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { AuthenticationContext } from "../../state/repo/Authentication.context";
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const loading = false;
   const router = useRouter();
 
-  const { doRequest, errors } = useRequest({
-    url: "/api/v1/authentication/login",
-    method: HTTP_METHOD.POST,
-    body: {
-      email,
-      password,
-    },
-  });
-
-  const { updateUserInfo, userInfo, getUserInfo } = useLocalStorage();
+  const { currentUser, login, isLoading, error } = useContext(
+    AuthenticationContext
+  );
 
   useEffect(() => {
-    getUserInfo();
-    if (userInfo) {
+    if (currentUser) {
       router.push("/");
     }
-  }, []);
+  }, [currentUser]);
 
-  const submitHandler = async (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    validateForm(email, password);
     if (!error) {
-      try {
-        const res = await doRequest();
-        if (res) {
-          updateUserInfo(res);
-          router.push("/");
-        }
-      } catch (err) {
-        setError(err.response.data.message);
+      await login(email, password);
+      if (!error && !isLoading && currentUser) {
+        router.push("/");
       }
-    }
-  };
-
-  const validateForm = (email, password) => {
-    if (!email && !password) {
-      setError("Invalid email and password");
-    } else if (!email) {
-      setError("Invalid email");
-    } else if (!password) {
-      setError("Invalid password");
     } else {
-      setError("");
+      console.log(error);
     }
   };
 
@@ -68,9 +39,8 @@ const LoginScreen = ({ location, history }) => {
     <FormContainer>
       <h1 className="row justify-content-center">Login In</h1>
       {error && <Message variant="danger">{error}</Message>}
-      {errors}
-      {loading && <Loader />}
-      <Form onSubmit={submitHandler}>
+      {isLoading && <Loader />}
+      <Form onSubmit={loginHandler}>
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -91,7 +61,12 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary" className="mt-3">
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-3"
+          onClick={loginHandler}
+        >
           Sign In
         </Button>
       </Form>

@@ -17,16 +17,24 @@ import Rating from "../../components/Rating";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import Meta from "../../components/Meta";
+import { useQuery } from "react-query";
 
 const ProductPage = ({ product }) => {
   const [qty, setQty] = useState(0);
 
   // TODO: resolve these issues
-  let loading = false;
   let error = null;
+  let isLoading = false;
+
+  const {} = useLocalStorage();
+
+  useEffect(() => {}, []);
 
   const addToCartHandler = () => {
-    console.log(qty);
+    console.log(Number(qty));
+    const { isLoading, error, data } = useQuery("cartData", () =>
+      fetch(`/api/v1/cart/`).then((res) => res.json())
+    );
     // history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
@@ -39,7 +47,7 @@ const ProductPage = ({ product }) => {
       <Link className="btn btn-light my-3" href="/">
         Go Back
       </Link>
-      {loading ? (
+      {isLoading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>

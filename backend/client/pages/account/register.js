@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
-import useRequest from "../../hooks/useRequest";
-import HTTP_METHOD from "../../constants/request-constants";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { AuthenticationContext } from "../../state/repo/Authentication.context";
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -17,59 +14,23 @@ const RegisterScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [error, setError] = useState("");
 
-  const { doRequest, errors } = useRequest({
-    url: "/api/v1/authentication/register",
-    method: HTTP_METHOD.POST,
-    body: {
-      email,
-      password,
-      name,
-    },
-  });
+  const { currentUser, register, isLoading, error } = useContext(
+    AuthenticationContext
+  );
 
-  const { updateUserInfo, userInfo, getUserInfo } = useLocalStorage();
-
-  useEffect(() => {
-    getUserInfo();
-    if (userInfo) {
-      router.push("/");
-    }
-  }, []);
-
-  const loading = false;
   const router = useRouter();
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    validateForm(email, password, name, confirmPassword);
-    if (!error) {
-      try {
-        const res = await doRequest();
-        if (res) {
-          updateUserInfo(res);
-          router.push("/");
-        }
-      } catch (err) {
-        setError(err.response.data.message);
-      }
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/");
     }
-  };
+  }, [currentUser]);
 
-  const validateForm = (email, password, name, confirmPassword) => {
-    if (!name) {
-      setError("Name missing");
-    } else if (!email) {
-      setError("Email missing");
-    } else if (!password) {
-      setError("Password missing");
-    } else if (!confirmPassword) {
-      setError("Please re-enter the password");
-    } else if (password !== confirmPassword) {
-      setError("Passwords do not match");
-    } else {
-      setError("");
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    if (!error) {
+      await register(email, name, password, confirmPassword);
     }
   };
 
@@ -78,9 +39,8 @@ const RegisterScreen = ({ location, history }) => {
       <h1 className="row justify-content-center">Sign Up</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
-      {errors}
-      {loading && <Loader />}
-      <Form onSubmit={submitHandler}>
+      {isLoading && <Loader />}
+      <Form onSubmit={registerHandler}>
         <Form.Group controlId="name" className="mt-2">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -123,7 +83,12 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary" className="mt-3">
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-3"
+          onClick={registerHandler}
+        >
           Register
         </Button>
       </Form>
