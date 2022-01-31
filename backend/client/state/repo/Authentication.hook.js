@@ -29,13 +29,13 @@ const useAuthHook = () => {
     try {
       if (isValid) {
         // api response handling
-        const res = await authAxios.post("/login", {
+        const { data } = await authAxios.post("/login", {
           email,
           password,
         });
-        if (res) {
-          updateUserInfo(res);
-          setCurrentUser(res);
+        if (data) {
+          updateUserInfo(data);
+          setCurrentUser(data);
         }
       }
     } catch (err) {
@@ -58,15 +58,14 @@ const useAuthHook = () => {
       try {
         if (isValid) {
           // api response handling
-          const res = await authAxios.post("/register", {
+          const { data } = await authAxios.post("/register", {
             email,
             password,
             name,
           });
-          if (res) {
-            console.table(res);
-            updateUserInfo(res);
-            setCurrentUser(res);
+          if (data) {
+            updateUserInfo(data);
+            setCurrentUser(data);
           }
         }
       } catch (err) {
