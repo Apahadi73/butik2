@@ -7,8 +7,7 @@ services:
       - "5430:5430"
 
   auth:
-    image: apahadi73/auth-go
-    # build: .
+    build: .
     ports:
       - 5000:5000
     depends_on:

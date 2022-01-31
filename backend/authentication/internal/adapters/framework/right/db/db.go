@@ -54,8 +54,8 @@ func (da Adapter) CloseDbConnection() {
 }
 
 // adds new user to the user table
-func (da Adapter) CreateUser( email , password string) (*models.DBUser,error) {
-	rUser := models.DBUser{Email: email,Password: password}
+func (da Adapter) CreateUser( email , password,name string) (*models.DBUser,error) {
+	rUser := models.DBUser{Email: email,Password: password, Name: name}
 	// create a new user in the user table
 	_, err := da.db.Model(&rUser).Insert()
 

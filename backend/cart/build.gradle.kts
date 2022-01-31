@@ -41,4 +41,6 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
     testImplementation("org.mockito:mockito-inline:${mockito_version}")
     testImplementation("org.mockito:mockito-junit-jupiter:${mockito_version}")
+
+    implementation("org.ehcache:ehcache:3.0.0.m4")
 }
