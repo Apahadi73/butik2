@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Row,
   Col,
@@ -18,23 +18,22 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import Meta from "../../components/Meta";
 import { useQuery } from "react-query";
+import { AuthenticationContext } from "../../state/repo/Authentication.context";
 
 const ProductPage = ({ product }) => {
   const [qty, setQty] = useState(0);
+  const { currentUser } = useContext(AuthenticationContext);
 
   // TODO: resolve these issues
   let error = null;
   let isLoading = false;
 
-  const {} = useLocalStorage();
-
-  useEffect(() => {}, []);
-
   const addToCartHandler = () => {
     console.log(Number(qty));
     const { isLoading, error, data } = useQuery("cartData", () =>
-      fetch(`/api/v1/cart/`).then((res) => res.json())
+      fetch(`/api/v1/cart/${currentUser}`).then((res) => res.json())
     );
+
     // history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
@@ -66,7 +65,9 @@ const ProductPage = ({ product }) => {
                 <ListGroup.Item>
                   <Rating
                     value={product.rating}
-                    text={`${product.numReviews} reviews`}
+                    text={`${
+                      product.numReviews ? product.numReviews : 0
+                    } reviews`}
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
@@ -115,14 +116,27 @@ const ProductPage = ({ product }) => {
                   )}
 
                   <ListGroup.Item>
-                    <Button
-                      onClick={addToCartHandler}
-                      className="btn-block"
-                      type="button"
-                      disabled={product.count_in_stock === 0}
-                    >
-                      Add To Cart
-                    </Button>
+                    {currentUser ? (
+                      <Button
+                        onClick={addToCartHandler}
+                        className="btn-block"
+                        type="button"
+                        disabled={product.count_in_stock === 0}
+                      >
+                        Add To Cart
+                      </Button>
+                    ) : (
+                      <>
+                        <Link
+                          href="/account/login"
+                          className="btn-block"
+                          type="button"
+                          disabled={product.count_in_stock === 0}
+                        >
+                          Sign In to Buy
+                        </Link>
+                      </>
+                    )}
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
