@@ -1,21 +1,16 @@
-version: "3.3"
+version: "3.9"
 
 services:
-  butik-cart:
-    image: apahadi73/butik-cart
-    ports:
-      - 27020:27020
+  #  cart-mongod:
+  #    image: apahadi73/cart-mongod
+  #    ports:
+  #      - "27020:27020"
 
-  # server:
-  #   image: apahadi73/products
-  #   ports:
-  #     - 5000:5000
-  #   depends_on:
-  #     - "db"
-  #   environment:
-  #     POSTGRES_USER: "postgres"
-  #     POSTGRES_PASSWORD: "password"
-  #     POSTGRES_DATABASE: "postgres"
-  #     POSTGRES_SERVER: "db"
-  #     POSTGRES_PORT: "5432"
-  #     POSTGRES_DB: "postgres"
+  cart-server:
+    build: .
+    #    depends_on:
+    #      - cart-mongod
+    environment:
+      - ENVIRONMENT=dev
+    ports:
+      - "5003:5003"
