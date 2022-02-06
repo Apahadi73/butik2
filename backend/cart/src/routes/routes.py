@@ -24,7 +24,8 @@ def get_carts(skip: int = 0, limit: int = 100, db: MongoClient = Depends(db.conn
         if not carts:
             raise HTTPException(status_code=404, detail="carts not found")
         return carts
-
+    except HTTPException as httpErr:
+        raise HTTPException(status_code=httpErr.status_code, detail=httpErr.detail)
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
         raise HTTPException(status_code=500, detail="Something went wrong while fetching carts.")
@@ -38,8 +39,9 @@ def create_cart(
 ):
     try:
         response =  crud.create_cart(db=db, cart=cart)
-        print(response)
         return response
+    except HTTPException as httpErr:
+        raise HTTPException(status_code=httpErr.status_code, detail=httpErr.detail)
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
         raise HTTPException(status_code=500, detail="Something went wrong while initializing cart.")
@@ -52,8 +54,8 @@ def get_carts_by_id(id:str = Path(None,description="Enter Cart Id"), db: MongoCl
         if cart is None:
             raise HTTPException(status_code=404, detail="Cart not found")
         return cart
-    except HTTPException:
-        raise HTTPException(status_code=404, detail="Cart not found")
+    except HTTPException as httpErr:
+        raise HTTPException(status_code=httpErr.status_code, detail=httpErr.detail)
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
         raise HTTPException(status_code=500, detail="Something went wrong while fetching cart information.")
@@ -68,8 +70,8 @@ def update_cart(cart: schemas.CartUpdate,
         if not cart:
             raise HTTPException(status_code=404, detail="Cart not found")
         return cart
-    except HTTPException:
-        raise HTTPException(status_code=404, detail="Cart not found")
+    except HTTPException as httpErr:
+        raise HTTPException(status_code=httpErr.status_code, detail=httpErr.detail)
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
         raise HTTPException(status_code=500, detail="Something went wrong while updating cart.")
@@ -82,8 +84,8 @@ def delete_carts_by_id(id:str = Path(None,description="Enter Cart Id"), db: Mong
             return "Successfully deleted cart with id: ${id}"
         else:
             raise HTTPException(status_code=404, detail="Cart not found")
-    except HTTPException:
-        raise HTTPException(status_code=404, detail="Cart not found")
+    except HTTPException as httpErr:
+        raise HTTPException(status_code=httpErr.status_code, detail=httpErr.detail)
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
         raise HTTPException(status_code=500, detail="Something went wrong while deleting cart.")
