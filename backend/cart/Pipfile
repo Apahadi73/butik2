@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = ">=0.68.0,<0.69.0"
+uvicorn = "<0.16.0,>=0.15.0"
+alembic = "*"
+psycopg2-binary = "*"
+starlette = "*"
+databases = "*"
+pipenv = "==2021.11.15"
+pydantic = "<2.0.0,>=1.8.0"
+SQLAlchemy = "*"
+pymongo = "3.12"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

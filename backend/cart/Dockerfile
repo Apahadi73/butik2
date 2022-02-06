@@ -1,7 +1,14 @@
-FROM openjdk:8-jdk
-EXPOSE 5003:5003
-RUN mkdir /app \
-./gradlew installDist
-COPY ./build/install/com.example.cart/ /app/
-WORKDIR /app/bin
-CMD ["./cart"]
+
+# Pull base image
+FROM python:3.9
+# Set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /code/
+# Install dependencies
+RUN pip install pipenv
+COPY Pipfile Pipfile.lock /code/
+RUN pipenv install --system --dev
+COPY . /code/
+EXPOSE 5000
+CMD ["python", "./src/main.py"]
