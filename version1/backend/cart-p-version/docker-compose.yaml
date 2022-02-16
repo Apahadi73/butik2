@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  butik-cart-db:
+    image: apahadi73/cart-mongod
+    ports:
+      - 27020:27020
+
+  server:
+    image: apahadi73/butik-cart
+    # build: .
+    ports:
+      - 5000:5000
+    environment:
+      DATABASE_HOST : butik-cart-db
+      DATABASE_SERVER : mongodb
+      DATABASE_PORT : 27020
+      DATABASE_DB : cart

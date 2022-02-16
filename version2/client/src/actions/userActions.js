@@ -70,10 +70,12 @@ export const logout =  () => async (dispatch) => {
       'Content-Type': 'application/json',
     },
   }
+  
   await axiosClient.post(
     '/api/authentication/logout',
     config
   )
+
   localStorage.removeItem('userInfo')
   localStorage.removeItem('cartItems')
   localStorage.removeItem('shippingAddress')
