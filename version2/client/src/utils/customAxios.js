@@ -1,11 +1,9 @@
 import Axios from "axios";
 
-const DEV_URL = ""
-const PROD_URL = ""
-const LOCAL_URL = "http://localhost:3000"
+const BASE_URL = "http://butik.dev"
 
 const axiosClient = Axios.create({
-    baseURL: LOCAL_URL,
+    baseURL: BASE_URL,
     timeout: 1000,
     headers: {'X-Custom-Header': 'foobar'}
 });

@@ -17,51 +17,51 @@ build:
         manual:
           - src: "**/*.go"
             dest: .
-    - image: apahadi73/products
-      context: products
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.py"
-            dest: .
-    - image: apahadi73/butik-client
-      context: client
-      docker:
-        dockerfile: Dockerfile.dev
-      sync:
-        manual:
-          - src: "**/*.js"
-            dest: .
-    - image: apahadi73/butik-cart
-      context: cart
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.kt"
-            dest: .
-    # - image: apahadi/orders
-    #   context: orders
+    # - image: apahadi73/products
+    #   context: products
     #   docker:
     #     dockerfile: Dockerfile
     #   sync:
     #     manual:
-    #       - src: "src/**/*.ts"
+    #       - src: "src/**/*.py"
     #         dest: .
-    # - image: apahadi/expiration
-    #   context: expiration
+    # - image: apahadi73/butik-client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile.dev
+    #   sync:
+    #     manual:
+    #       - src: "**/*.js"
+    #         dest: .
+    # - image: apahadi73/butik-cart
+    #   context: cart
     #   docker:
     #     dockerfile: Dockerfile
     #   sync:
     #     manual:
-    #       - src: "src/**/*.ts"
+    #       - src: "src/**/*.kt"
     #         dest: .
-    # - image: apahadi/payments
-    #   context: payments
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: "src/**/*.ts"
-    #         dest: .
+    # # - image: apahadi/orders
+    # #   context: orders
+    # #   docker:
+    # #     dockerfile: Dockerfile
+    # #   sync:
+    # #     manual:
+    # #       - src: "src/**/*.ts"
+    # #         dest: .
+    # # - image: apahadi/expiration
+    # #   context: expiration
+    # #   docker:
+    # #     dockerfile: Dockerfile
+    # #   sync:
+    # #     manual:
+    # #       - src: "src/**/*.ts"
+    # #         dest: .
+    # # - image: apahadi/payments
+    # #   context: payments
+    # #   docker:
+    # #     dockerfile: Dockerfile
+    # #   sync:
+    # #     manual:
+    # #       - src: "src/**/*.ts"
+    # #         dest: .
