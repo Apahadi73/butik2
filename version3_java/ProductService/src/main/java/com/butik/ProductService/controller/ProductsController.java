@@ -1,6 +1,13 @@
 package com.butik.ProductService.controller;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author amirpahadi
@@ -8,8 +15,11 @@ import org.springframework.web.bind.annotation.*;
  * @since 30/03/2022
  */
 @RestController
-@RequestMapping("/api/v1/products")
+@RequestMapping("/products")
 public class ProductsController {
+	
+	@Autowired
+	private Environment environment;
 
     @PostMapping
     public String createProduct(){
@@ -18,8 +28,9 @@ public class ProductsController {
 
     @GetMapping
     public String getProduct(){
-        return "HTTP GET request handled";
+        return "HTTP GET request handled: " + environment.getProperty("local.server.port");
     }
+    
 
     @PutMapping
     public String updateProduct(){
