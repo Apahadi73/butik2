@@ -28,4 +28,5 @@ public class ProductEntity implements Serializable {
     private String title;
     private BigDecimal price;
     private Integer quantity;
+
 }

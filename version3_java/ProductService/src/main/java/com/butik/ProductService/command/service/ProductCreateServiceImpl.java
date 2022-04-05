@@ -31,7 +31,7 @@ public class ProductCreateServiceImpl implements ProductCreateService {
      * @param createProductRestModel - a CreateProductRestModel object
      * @return string representation of newly CreateProductRestModel object
      */
-    public String createProduct(CreateProductRestModel createProductRestModel) {
+    public String createProduct(CreateProductRestModel createProductRestModel) throws Exception {
         // create a new CreateProductCommand
         CreateProductCommand createProductCommand= CreateProductCommand.builder()
                 .title(createProductRestModel.getTitle())
@@ -42,13 +42,7 @@ public class ProductCreateServiceImpl implements ProductCreateService {
 
         // send the commands
         String response;
-        try {
-            response = commandGateway.sendAndWait(createProductCommand);
-        }
-        catch (Exception e){
-            response = e.getLocalizedMessage();
-        }
-
+        response = commandGateway.sendAndWait(createProductCommand);
         return response;
     }
 }

@@ -8,5 +8,5 @@ import com.butik.ProductService.core.models.CreateProductRestModel;
  * @since 31/03/2022
  */
 public interface ProductCreateService {
-    String createProduct(CreateProductRestModel createProductRestModel);
+    String createProduct(CreateProductRestModel createProductRestModel) throws Exception;
 }

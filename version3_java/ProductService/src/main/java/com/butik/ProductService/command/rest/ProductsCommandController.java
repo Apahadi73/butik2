@@ -33,7 +33,7 @@ public class ProductsCommandController {
     }
 
     @PostMapping
-    public String createProduct(@Valid @RequestBody CreateProductRestModel createProductRestModel){
+    public String createProduct(@Valid @RequestBody CreateProductRestModel createProductRestModel) throws Exception {
         return productService.createProduct(createProductRestModel);
     }
 

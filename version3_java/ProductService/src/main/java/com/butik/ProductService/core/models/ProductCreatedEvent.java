@@ -1,4 +1,4 @@
-package com.butik.ProductService.command.events;
+package com.butik.ProductService.core.models;
 
 import lombok.Data;
 

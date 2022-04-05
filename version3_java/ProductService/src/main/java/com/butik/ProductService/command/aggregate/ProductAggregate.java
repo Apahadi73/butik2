@@ -1,6 +1,6 @@
 package com.butik.ProductService.command.aggregate;
 
-import com.butik.ProductService.command.events.ProductCreatedEvent;
+import com.butik.ProductService.core.models.ProductCreatedEvent;
 
 /**
  * @author amirpahadi

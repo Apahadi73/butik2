@@ -1,7 +1,7 @@
 package com.butik.ProductService.command.aggregate;
 
 import com.butik.ProductService.command.CreateProductCommand;
-import com.butik.ProductService.command.events.ProductCreatedEvent;
+import com.butik.ProductService.core.models.ProductCreatedEvent;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
@@ -31,9 +31,20 @@ public class ProductAggregateImpl implements ProductAggregate{
 
     @CommandHandler
     public ProductAggregateImpl(CreateProductCommand createProductCommand){
+        // validate Create Product Command
+        if (createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0){
+            throw new IllegalArgumentException("Price cannot be less or equal to zero");
+        }
+
+        if (createProductCommand.getTitle() == null ||createProductCommand.getTitle() .isBlank() ){
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+
         // handle ProductCreatedEvent
         ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
         BeanUtils.copyProperties(createProductCommand,productCreatedEvent);
+
+        // stage productCreatedEvent for execution
         AggregateLifecycle.apply(productCreatedEvent);
         log.info("CreateProductEvent", "create product event received by CommandHandler");
     }

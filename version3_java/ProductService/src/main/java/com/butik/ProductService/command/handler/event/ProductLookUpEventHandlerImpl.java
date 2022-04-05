@@ -1,9 +1,8 @@
 package com.butik.ProductService.command.handler.event;
 
-import com.butik.ProductService.command.events.ProductCreatedEvent;
+import com.butik.ProductService.core.models.ProductCreatedEvent;
 import com.butik.ProductService.core.models.ProductLookUpEntity;
 import com.butik.ProductService.core.repository.ProductLookupRepository;
-import com.butik.ProductService.query.handler.event.ProductEventHandler;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
