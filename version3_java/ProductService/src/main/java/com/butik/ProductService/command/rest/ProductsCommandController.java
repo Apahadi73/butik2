@@ -1,6 +1,6 @@
 package com.butik.ProductService.command.rest;
 
-import com.butik.ProductService.core.service.ProductService;
+import com.butik.ProductService.command.service.ProductCreateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.butik.ProductService.core.models.CreateProductRestModel;
 
+import javax.validation.Valid;
+
 /**
  * @author amirpahadi
  * @version 1.0
@@ -22,34 +24,26 @@ import com.butik.ProductService.core.models.CreateProductRestModel;
 @RequestMapping("/products")
 public class ProductsCommandController {
 
-    // field variables
-	private Environment environment;
-    private ProductService productService;
+    private ProductCreateService productService;
 
     @Autowired
-    public ProductsCommandController(Environment environment, ProductService productService){
-        this.environment = environment;
+    public ProductsCommandController(ProductCreateService productService){
+        // field variables
         this.productService = productService;
     }
 
     @PostMapping
-    public String createProduct(@RequestBody CreateProductRestModel createProductRestModel){
+    public String createProduct(@Valid @RequestBody CreateProductRestModel createProductRestModel){
         return productService.createProduct(createProductRestModel);
     }
 
-    @GetMapping
-    public String getProduct(){
-        return "HTTP GET request handled: " + environment.getProperty("local.server.port");
-    }
-
-
-    @PutMapping
-    public String updateProduct(){
-        return "HTTP PUT request handled";
-    }
-
-    @DeleteMapping
-    public String deleteProduct(){
-        return "HTTP DELETE request handled";
-    }
+//    @PutMapping
+//    public String updateProduct(){
+//        return "HTTP PUT request handled";
+//    }
+//
+//    @DeleteMapping
+//    public String deleteProduct(){
+//        return "HTTP DELETE request handled";
+//    }
 }

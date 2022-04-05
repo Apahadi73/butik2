@@ -1,4 +1,4 @@
-package com.butik.ProductService.core.service;
+package com.butik.ProductService.command.service;
 
 import com.butik.ProductService.command.CreateProductCommand;
 import com.butik.ProductService.core.models.CreateProductRestModel;
@@ -15,13 +15,13 @@ import java.util.UUID;
  */
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductCreateServiceImpl implements ProductCreateService {
 
     // field variables
     private CommandGateway commandGateway;
 
     @Autowired
-    public ProductServiceImpl(CommandGateway commandGateway){
+    public ProductCreateServiceImpl(CommandGateway commandGateway){
         this.commandGateway = commandGateway;
     }
 

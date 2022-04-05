@@ -1,4 +1,4 @@
-package com.butik.ProductService.core.service;
+package com.butik.ProductService.command.service;
 
 import com.butik.ProductService.core.models.CreateProductRestModel;
 
@@ -7,6 +7,6 @@ import com.butik.ProductService.core.models.CreateProductRestModel;
  * @version 1.0
  * @since 31/03/2022
  */
-public interface ProductService {
+public interface ProductCreateService {
     String createProduct(CreateProductRestModel createProductRestModel);
 }

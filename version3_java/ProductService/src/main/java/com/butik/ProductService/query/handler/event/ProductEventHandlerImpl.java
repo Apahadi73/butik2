@@ -1,8 +1,9 @@
-package com.butik.ProductService.query.event.handler;
+package com.butik.ProductService.query.handler.event;
 
 import com.butik.ProductService.core.models.ProductEntity;
 import com.butik.ProductService.command.events.ProductCreatedEvent;
 import com.butik.ProductService.core.repository.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Slf4j
 public class ProductEventHandlerImpl implements ProductEventHandler{
     private final ProductRepository productRepository;
 
@@ -23,8 +25,10 @@ public class ProductEventHandlerImpl implements ProductEventHandler{
 
     @EventHandler
     public void on(ProductCreatedEvent productCreatedEvent){
+        log.info("ProductCreatedEvent", "create product event intercepted by event handler");
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(productCreatedEvent, productEntity);
         productRepository.save(productEntity);
+        log.info("ProductCreatedEvent", "new product saved into the database");
     }
 }

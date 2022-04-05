@@ -3,6 +3,7 @@ package com.butik.ProductService.command.aggregate;
 import com.butik.ProductService.command.CreateProductCommand;
 import com.butik.ProductService.command.events.ProductCreatedEvent;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
  */
 @Aggregate
 @NoArgsConstructor
+@Slf4j
 public class ProductAggregateImpl implements ProductAggregate{
 
     @AggregateIdentifier
@@ -29,20 +31,11 @@ public class ProductAggregateImpl implements ProductAggregate{
 
     @CommandHandler
     public ProductAggregateImpl(CreateProductCommand createProductCommand){
-
-        // Validate Create Product Command
-        if(createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0){
-            throw new IllegalArgumentException("Price of the product cannot be less or equal than zero.");
-        }
-
-        if(createProductCommand.getTitle() == null){
-            throw new IllegalArgumentException("Product must have an valid non-empty title.");
-        }
-
         // handle ProductCreatedEvent
         ProductCreatedEvent productCreatedEvent = new ProductCreatedEvent();
         BeanUtils.copyProperties(createProductCommand,productCreatedEvent);
         AggregateLifecycle.apply(productCreatedEvent);
+        log.info("CreateProductEvent", "create product event received by CommandHandler");
     }
 
     /**
@@ -55,5 +48,6 @@ public class ProductAggregateImpl implements ProductAggregate{
         this.title = productCreatedEvent.getProductId();
         this.price = productCreatedEvent.getPrice();
         this.quantity = productCreatedEvent.getQuantity();
+        log.info("CreateProductEvent", "create product event received by EventSourcingHandler");
     }
 }

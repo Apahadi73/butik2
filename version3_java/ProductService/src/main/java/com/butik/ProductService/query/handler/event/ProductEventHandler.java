@@ -1,4 +1,4 @@
-package com.butik.ProductService.query.event.handler;
+package com.butik.ProductService.query.handler.event;
 
 import com.butik.ProductService.command.events.ProductCreatedEvent;
 

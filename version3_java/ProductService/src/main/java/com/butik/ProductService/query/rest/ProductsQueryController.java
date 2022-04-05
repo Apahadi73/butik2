@@ -1,7 +1,7 @@
 package com.butik.ProductService.query.rest;
 
-import com.butik.ProductService.core.models.CreateProductRestModel;
-import com.butik.ProductService.core.service.ProductService;
+import com.butik.ProductService.query.models.ProductRestModel;
+import com.butik.ProductService.query.service.ProductQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,17 +20,23 @@ import java.util.List;
 public class ProductsQueryController {
 
     // field variables
-    private Environment environment;
-    private ProductService productService;
+    private final Environment environment;
+    private final ProductQueryService productQueryService;
 
     @Autowired
-    public ProductsQueryController(Environment environment, ProductService productService){
+    public ProductsQueryController(Environment environment, ProductQueryService productQueryService){
         this.environment = environment;
-        this.productService = productService;
+        this.productQueryService = productQueryService;
     }
+    
     @GetMapping
-    public List<CreateProductRestModel> getProducts(){
-        return "HTTP GET request handled: " + environment.getProperty("local.server.port");
+    public List<ProductRestModel> getProducts(){
+        return productQueryService.findProducts();
+    }
+
+    @GetMapping("/version")
+    public String getCurrentVersion(){
+        return "Version of service: " + environment.getProperty("service.version");
     }
 
 
