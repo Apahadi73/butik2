@@ -1,6 +1,8 @@
 package com.butik.ProductService.command.interceptor;
 
 import com.butik.ProductService.command.CreateProductCommand;
+import com.butik.ProductService.core.models.ProductLookUpEntity;
+import com.butik.ProductService.core.repository.ProductLookupRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandMessage;
 import org.axonframework.messaging.Message;
@@ -16,10 +18,19 @@ import java.util.function.BiFunction;
  * @author amirpahadi
  * @version 1.0
  * @since 05/04/2022
+ * brief: Handles all the interception logics related to CreateProductCommand command
  */
 @Component
 @Slf4j
 public class CreateProductCommandInterceptorImpl implements CreateProductCommandInterceptor {
+
+    private final ProductLookupRepository productLookupRepository;
+
+    public CreateProductCommandInterceptorImpl(ProductLookupRepository productLookupRepository){
+        this.productLookupRepository = productLookupRepository;
+    }
+
+
     /**
      * Invoked each time a message is about to be dispatched. The given {@code message} represents the message
      * being dispatched.
@@ -45,13 +56,15 @@ public class CreateProductCommandInterceptorImpl implements CreateProductCommand
             log.info("Intercepted commands",command.getPayload());
             if (CreateProductCommand.class.equals(command.getPayloadType())){
                 CreateProductCommand createProductCommand = (CreateProductCommand) command.getPayload();
-                // Validate Create Product Command
-                if(createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0){
-                    throw new IllegalArgumentException("Price of the product cannot be less or equal than zero.");
-                }
 
-                if(createProductCommand.getTitle() == null || createProductCommand.getTitle().isBlank()){
-                    throw new IllegalArgumentException("Product must have an valid non-empty title.");
+                // check whether the product already exists or not
+                ProductLookUpEntity productLookUpEntity =productLookupRepository.findByProductIdOrTitle(createProductCommand.getProductId(), createProductCommand.getTitle());
+                if (productLookUpEntity != null){
+                    throw new IllegalStateException(
+                            String.format("Product with productId %s or title %s already exists",
+                                    createProductCommand.getProductId(), createProductCommand.getTitle()
+                            )
+                    );
                 }
             }
             return command;
