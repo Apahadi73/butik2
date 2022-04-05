@@ -1,6 +1,6 @@
-package com.butik.ProductService.query;
+package com.butik.ProductService.query.event.handler;
 
-import com.butik.ProductService.core.events.ProductCreatedEvent.ProductCreatedEvent;
+import com.butik.ProductService.command.events.ProductCreatedEvent;
 
 /**
  * @author amirpahadi

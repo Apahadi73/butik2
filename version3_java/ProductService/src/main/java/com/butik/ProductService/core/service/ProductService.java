@@ -1,6 +1,6 @@
 package com.butik.ProductService.core.service;
 
-import com.butik.ProductService.core.entity.CreateProductRestModel;
+import com.butik.ProductService.core.models.CreateProductRestModel;
 
 /**
  * @author amirpahadi

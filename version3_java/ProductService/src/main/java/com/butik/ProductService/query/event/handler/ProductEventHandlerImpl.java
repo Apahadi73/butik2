@@ -1,7 +1,7 @@
-package com.butik.ProductService.query;
+package com.butik.ProductService.query.event.handler;
 
-import com.butik.ProductService.core.entity.ProductEntity;
-import com.butik.ProductService.core.events.ProductCreatedEvent.ProductCreatedEvent;
+import com.butik.ProductService.core.models.ProductEntity;
+import com.butik.ProductService.command.events.ProductCreatedEvent;
 import com.butik.ProductService.core.repository.ProductRepository;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;

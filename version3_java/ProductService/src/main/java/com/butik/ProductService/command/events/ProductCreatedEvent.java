@@ -1,4 +1,4 @@
-package com.butik.ProductService.core.events.ProductCreatedEvent;
+package com.butik.ProductService.command.events;
 
 import lombok.Data;
 

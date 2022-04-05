@@ -1,4 +1,4 @@
-package com.butik.ProductService.core.entity;
+package com.butik.ProductService.core.models;
 
 import java.math.BigDecimal;
 

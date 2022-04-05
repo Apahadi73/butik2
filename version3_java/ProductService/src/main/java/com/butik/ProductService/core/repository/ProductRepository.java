@@ -1,6 +1,6 @@
 package com.butik.ProductService.core.repository;
 
-import com.butik.ProductService.core.entity.ProductEntity;
+import com.butik.ProductService.core.models.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

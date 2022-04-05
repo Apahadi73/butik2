@@ -1,7 +1,7 @@
 package com.butik.ProductService.command.aggregate;
 
 import com.butik.ProductService.command.CreateProductCommand;
-import com.butik.ProductService.core.events.ProductCreatedEvent.ProductCreatedEvent;
+import com.butik.ProductService.command.events.ProductCreatedEvent;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;

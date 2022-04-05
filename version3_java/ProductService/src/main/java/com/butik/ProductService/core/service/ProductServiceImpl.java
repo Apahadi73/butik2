@@ -1,7 +1,7 @@
 package com.butik.ProductService.core.service;
 
 import com.butik.ProductService.command.CreateProductCommand;
-import com.butik.ProductService.core.entity.CreateProductRestModel;
+import com.butik.ProductService.core.models.CreateProductRestModel;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

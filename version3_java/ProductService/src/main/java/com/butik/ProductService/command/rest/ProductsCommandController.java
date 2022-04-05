@@ -1,4 +1,4 @@
-package com.butik.ProductService.rest;
+package com.butik.ProductService.command.rest;
 
 import com.butik.ProductService.core.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.butik.ProductService.core.entity.CreateProductRestModel;
+import com.butik.ProductService.core.models.CreateProductRestModel;
 
 /**
  * @author amirpahadi
@@ -20,14 +20,14 @@ import com.butik.ProductService.core.entity.CreateProductRestModel;
  */
 @RestController
 @RequestMapping("/products")
-public class ProductsController {
+public class ProductsCommandController {
 
     // field variables
 	private Environment environment;
     private ProductService productService;
 
     @Autowired
-    public ProductsController(Environment environment, ProductService productService){
+    public ProductsCommandController(Environment environment, ProductService productService){
         this.environment = environment;
         this.productService = productService;
     }
