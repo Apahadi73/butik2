@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
         <module name="APIGateway" />
-        <module name="DiscoveryService" />
         <module name="OrderService" />
+        <module name="DiscoveryService" />
         <module name="ProductService" />
       </profile>
     </annotationProcessing>
