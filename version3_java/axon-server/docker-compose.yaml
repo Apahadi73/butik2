@@ -41,3 +41,7 @@ volumes:
 
 networks:
     axon-demo:
+         
+
+# axoniq.axonserver.name=axonserver
+# axoniq.axonserver.hostname=localhost
